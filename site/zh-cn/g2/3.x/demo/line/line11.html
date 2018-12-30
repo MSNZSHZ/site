@@ -33,29 +33,6 @@ subCat: 多折线图
         margin-bottom: 10px
     }
 
-    .legend-item-marker {
-        width: 18px;
-        height: 18px;
-        border-radius: 50px;
-        text-align: center;
-        font-size: 10px;
-        margin-top: 5px;
-        color: white;
-        float: left;
-        opacity: 0.7;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #fff;
-    }
-
-    .legend-item-marker:after {
-        display: inline-block;
-        width: 0;
-        height: 100%;
-        vertical-align: middle;
-        content: '';
-    }
-
     .legend-item-name {
         min-width:60px;
         height: 100%;
@@ -183,14 +160,32 @@ subCat: 多折线图
             useHtml: true,
             position: 'right',
             reactive: true,
+            legendStyle: {
+                MARKER_CLASS: {
+                    width: '18px',
+                    height: '18px',
+                    lineHeight: '18px',
+                    borderRadius: '50px',
+                    display: 'inline-block',
+                    marginRight: '4px',
+                    textAlign: 'center',
+                    fontZize: '10px',
+                    marginTop: '3px',
+                    color: 'white',
+                    float: 'left',
+                    borderStyle: 'solid',
+                    borderWidth: '1px',
+                    borderColor: '#ccc'
+                }
+            },
             containerTpl: '<div class="g2-legend">2016 年支出排行<div class="g2-legend-list"></div></div>',
             itemTpl: function (value, color, checked, index) {
-                const markerDom = '<div class="legend-item-marker" style="background-color:' + color +
+                const markerDom = '<div class="g2-legend-marker" style="background-color:' + color +
                     '">' + (index+1) + '</div>';
                 const nameDom = '<div class="legend-item-name">' + value + '</div>';
                 const percentDom = '<div class="legend-item-percent">' + yearPercent[value].percent.toFixed(2) + '</div>';
                 const valueDom = '<div class="legend-item-value">' + yearPercent[value].value + '</div>';
-                return '<div class="g2-legend-list-item">' + markerDom + nameDom + percentDom + valueDom + '</div>';
+                return '<div class="g2-legend-list-item" data-value="' + value +'">' + markerDom + nameDom + percentDom + valueDom + '</div>';
             }
         });
         chart.line().position('year*value').color('type', ['#ff4d4f', '#ff7a45', '#ffa940', '#facc14', '#bae637', '#73d13d', '#36cfc9', '#40a9ff']);
