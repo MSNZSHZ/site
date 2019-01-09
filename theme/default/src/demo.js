@@ -53,23 +53,26 @@ if ($iframeContainer.hasClass('g2')) {
       $('.lSPager.lSpg').remove();
     }
   });
-  slider.goToSlide(currentSlider);
-  displaySliderNav();
-  if (sliderCount > 7) {
-    $prevSlider.show();
-    $nextSlider.show();
+  if (slider && slider.goToSlide) {
+    slider.goToSlide(currentSlider);
     displaySliderNav();
-    $prevSlider.click(function() {
-      slider.goToPrevSlide();
-      currentSlider -= 7;
+    if (sliderCount > 7) {
+      $prevSlider.show();
+      $nextSlider.show();
       displaySliderNav();
-    });
 
-    $nextSlider.click(function() {
-      slider.goToNextSlide(true);
-      currentSlider += 7;
-      displaySliderNav();
-    });
+      $prevSlider.click(function() {
+        slider.goToPrevSlide();
+        currentSlider -= 7;
+        displaySliderNav();
+      });
+
+      $nextSlider.click(function() {
+        slider.goToNextSlide(true);
+        currentSlider += 7;
+        displaySliderNav();
+      });
+    }
   }
 }
 
