@@ -69,6 +69,25 @@ chartDetail: ${base}zh-cn/vis/chart/stacked-area.html
       return textCfg;
     }
   });
+  // 自定义图例项的 marker 图形样式
+  chart.legend({
+    marker: function marker(x, y, r, ctx) {
+      // 11px * 9px
+      ctx.save();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = ctx.fillStyle;
+      ctx.moveTo(x - 5.5, y - 4);
+      ctx.lineTo(x + 5.5, y - 4);
+      ctx.stroke();
+      ctx.restore();
+      ctx.globalAlpha = 0.1;
+      ctx.moveTo(x - 5.5, y - 4);
+      ctx.lineTo(x + 5.5, y - 4);
+      ctx.lineTo(x + 5.5, y + 4);
+      ctx.lineTo(x - 5.5, y + 4);
+      ctx.closePath();
+    }
+  });
   chart.tooltip({
     showCrosshairs: true,
     custom: true, // 自定义 tooltip 内容框
