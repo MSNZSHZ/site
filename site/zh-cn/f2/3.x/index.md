@@ -33,9 +33,9 @@ usecases:
     title: 支付宝
     description: 覆盖蚂蚁会员、支付宝月账单、个人总资产等业务场景，通过可视化的形式帮助您更快更好得了解您的消费数据。
   - img: ${assets}/image/home/f2/usecase-tpp.png
-    icon: ${assets}/image/home/f2/tpp-logo.png
-    title: 淘票票专业版
-    description: 助力票房数据、受众画像、播放量等可视分析场景，帮助用户更好地洞察数据背后的信息以做出更好的决策。
+    icon: ${assets}/image/home/f2/dt-logo.png
+    title: 灯塔专业版
+    description: 灯塔专业版，为影视人提供有价值的数据。整合阿里海量用户数据，提供全面专业数据，让行业更加公开透明，提升行业决策效率。
 clients:
   - img: ${assets}/image/home/f2/mayicaifu.png
   - img: ${assets}/image/home/f2/taopiaopiao.png
