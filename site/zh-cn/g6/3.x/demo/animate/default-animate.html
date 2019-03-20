@@ -1,0 +1,53 @@
+<!--
+index: 2
+title: 默认动画
+resource:
+  jsFiles:
+screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552996333072-ac3949af-c9ac-4351-9e06-8b4703127f7e.gif
+-->
+<script>
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    animate: true
+  });
+  const data = {
+    nodes:[
+      {
+        id: 'a',
+        x: 200,
+        y: 100,
+        style: { fill: '#F04864', stroke: null }
+      }, {
+        id: 'b',
+        x: 100,
+        y: 200,
+        style: { fill: '#FACC14', stroke: null }
+      }, {
+        id: 'c',
+        x: 300,
+        y: 200,
+        style: { fill: '#40a9ff', stroke: null }
+      }
+    ],
+    edges:[{
+      id: 'a2b',
+      source: 'a',
+      target: 'b'
+    }, {
+      id: 'a2c',
+      source: 'a',
+      target: 'c'
+    }]
+  };
+  graph.data(data);
+  graph.render();
+  setInterval(() => {
+    data.nodes.forEach(node => {
+      node.x += Math.random() * 50 - 25;
+      node.y += Math.random() * 50 - 25;
+    });
+    graph.changeData(data);
+  }, 600);
+</script>

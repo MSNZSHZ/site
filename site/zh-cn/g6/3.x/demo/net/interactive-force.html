@@ -1,0 +1,126 @@
+<!--
+index: 1
+title: 小米关系图谱
+resource:
+  jsFiles:
+    - ${url.jquery}
+    - ${url.d3}
+screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552990627466-92a4ce23-79b2-4930-ab05-6478b56ce880.gif
+plotDescription: 展示了小米科技有限责任公司的企业关系图谱
+-->
+<style>
+  .g6-tooltip {
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #545454;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 8px;
+    box-shadow: rgb(174, 174, 174) 0px 0px 10px;
+  }
+</style>
+<script>
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    autoPaint: false,
+    modes: {
+      default: ['drag-canvas', {
+        type: 'tooltip',
+        formatText: model => { return  model.name}
+      }, {
+        type: 'edge-tooltip',
+        formatText: (model, e) => {
+          const edge = e.item;
+          return '来源：' + edge.getSource().getModel().name + '<br/>去向：' + edge.getTarget().getModel().name;
+        }
+      }]
+    },
+    defaultNode: {
+      size: [10, 10],
+      color: 'steelblue'
+    },
+    defaultEdge: {
+      size: 1
+    },
+    nodeStyle: {
+      default: {
+        lineWidth: 2,
+        fill: 'steelblue'
+      },
+      highlight: {
+        opacity: 1
+      },
+      dark: {
+        opacity: 0.2
+      }
+    },
+    edgeStyle: {
+      default: { stroke: '#e2e2e2', lineAppendWidth: 2 },
+      highlight: { stroke: '#999' }
+    }
+  });
+  function clearAllStats() {
+    graph.setAutoPaint(false);
+    graph.getNodes().forEach(node => {
+      graph.clearItemStates(node);
+    });
+    graph.getEdges().forEach(edge => {
+      graph.clearItemStates(edge);
+    });
+    graph.paint();
+    graph.setAutoPaint(true);
+  }
+  graph.on('node:mouseenter', e => {
+    const item = e.item;
+    graph.setAutoPaint(false);
+    graph.getNodes().forEach(node => {
+      graph.clearItemStates(node);
+      graph.setItemState(node, 'dark', true);
+    });
+    graph.setItemState(item, 'dark', false);
+    graph.setItemState(item, 'highlight', true);
+    graph.getEdges().forEach(edge => {
+      if (edge.getSource() === item) {
+        graph.setItemState(edge.getTarget(), 'dark', false);
+        graph.setItemState(edge.getTarget(), 'highlight', true);
+        graph.setItemState(edge, 'highlight', true);
+        edge.toFront();
+      } else if (edge.getTarget() === item) {
+        graph.setItemState(edge.getSource(), 'dark', false);
+        graph.setItemState(edge.getSource(), 'highlight', true);
+        graph.setItemState(edge, 'highlight', true);
+        edge.toFront();
+      } else {
+        graph.setItemState(edge, 'highlight', false);
+      }
+    });
+    graph.paint();
+    graph.setAutoPaint(true);
+  });
+  graph.on('node:mouseleave', clearAllStats);
+  graph.on('canvas:click', clearAllStats);
+  $.getJSON('/assets/data/xiaomi.json', data => {
+    graph.data({ nodes: data.nodes, edges: data.edges.map((edge, i) => {
+        edge.id = 'edge' + i;
+        return Object.assign({}, edge);
+      }) });
+    const simulation = d3.forceSimulation()
+      .force("link", d3.forceLink().id(function(d) { return d.id; }).strength(0.5))
+      .force("charge", d3.forceManyBody())
+      .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2));
+    simulation
+      .nodes(data.nodes)
+      .on("tick", ticked);
+    simulation.force("link")
+      .links(data.edges);
+
+    graph.render();
+
+    function ticked() {
+      graph.refreshPositions();
+      graph.paint();
+    }
+  });
+</script>

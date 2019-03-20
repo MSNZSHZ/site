@@ -4,6 +4,7 @@ title: Newick
 screenshot: https://cdn.nlark.com/yuque/0/2018/png/93506/1535982139182-c744350a-87b7-4fe4-a2f5-478a72f2efd7.png
 resource:
   jsFiles:
+    - https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js
 plotDescription: 详见：https://en.wikipedia.org/wiki/Newick_format
 -->
 <script>
@@ -18,7 +19,7 @@ plotDescription: 详见：https://en.wikipedia.org/wiki/Newick_format
    * 模版已经默认按以下链接安装了最新版 G6 和 G6Plugins
    * https://unpkg.com/@antv/g6/build/g6.js
    * https://unpkg.com/@antv/g6/build/plugins.js
-   * 如果你无法访问上述链接，你需要自己手动安装能访问的链接安装 G6 
+   * 如果你无法访问上述链接，你需要自己手动安装能访问的链接安装 G6
    */
   const { Util } = G6;
   const data = {
@@ -136,4 +137,3 @@ plotDescription: 详见：https://en.wikipedia.org/wiki/Newick_format
   });
   tree.read({ roots: [data] });
 </script>
-  

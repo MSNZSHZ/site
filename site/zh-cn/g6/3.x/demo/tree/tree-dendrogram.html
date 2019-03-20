@@ -1,0 +1,63 @@
+<!--
+index: 0
+title: 系统树
+screenshot: https://gw.alipayobjects.com/zos/rmsportal/oKODdTRKoHnvwMvXZUgD.png
+resource:
+  jsFiles:
+    - ${url.jquery}
+    - ${url.hierarchy}
+-->
+<script>
+  $.getJSON('/assets/data/modeling-methods.json', function (data) {
+    const graph = new G6.TreeGraph({
+      container: 'mountNode',
+      width: window.innerWidth,
+      height: window.innerHeight,
+      pixelRatio: 2,
+      modes: {
+        default: [{
+          type: 'collapse-expand',
+          onChange(item, collapsed) {
+            const data = item.get('model').data;
+            data.collapsed = collapsed;
+            return true;
+          }
+        }, 'drag-canvas', 'zoom-canvas']
+      },
+      defaultNode: { size: 16, anchorPoints: [[0,0.5], [1,0.5]]},
+      defaultEdge: { shape: 'cubic-horizontal' },
+      nodeStyle: {
+        default: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        }
+      },
+      edgeStyle: {
+        default: {
+          stroke: '#A3B1BF'
+        }
+      },
+      layout: function(data) {
+        return Hierarchy.dendrogram(data, {
+          direction: 'LR', // H / V / LR / RL / TB / BT
+          nodeSep: 20,
+          rankSep: 100
+        });
+      }
+    });
+    graph.data(data);
+    graph.render();
+    graph.getNodes().forEach(node => {
+      const model = node.get('model');
+      model.label = model.data.name;
+      model.labelCfg = { offset: 10, style: { fill: '#666' } };
+      if (model.children && model.children.length > 0) {
+        model.labelCfg.position = 'left';
+      } else {
+        model.labelCfg.position = 'right';
+      }
+    });
+    graph.refresh();
+    graph.fitView();
+  });
+</script>
