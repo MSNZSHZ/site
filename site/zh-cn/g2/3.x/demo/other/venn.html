@@ -28,9 +28,15 @@ subCat: 其他
     chart.legend(false);
     chart.tooltip(false);
     chart.venn()
-        .label('sets') // 这个字段用来获取集合关系字段
+        .position('x*y')
+        .sets('sets')
+        .label('label', {
+            textStyle: {
+                fill: 'white'
+            }
+        }) // 这个字段用来获取集合关系字段
         .size('size') // 这个字段用来获取集合 size
-        .color('id')
+        .color('label')
         .active(false)
         .style({
             lineWidth: 10,
