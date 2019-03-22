@@ -3,6 +3,7 @@ index: 0
 title: 工作流
 resource:
   jsFiles:
+    - https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js
     - ${url['g6-plugins']}
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/NuapphcyMOSBkjwhJMGL.png
 -->
@@ -44,7 +45,7 @@ const data = {
   }]
 };
 const graph = new G6.Graph({
-  container: 'mountNode', 
+  container: 'mountNode',
   fitView: 'cc',
   height: window.innerHeight, // 画布高
   plugins: [ new G6.Plugins['layout.dagre']() ],
@@ -70,4 +71,3 @@ graph.edge({
 });
 graph.read(data);
 </script>
-    

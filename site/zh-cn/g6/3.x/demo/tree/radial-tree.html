@@ -1,0 +1,54 @@
+<!--
+index: 1
+title: 环形树
+screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989420680-37e51b07-553e-403d-ac1d-3fa1ca8b3932.png
+resource:
+  jsFiles:
+    - ${url.jquery}
+    - ${url.hierarchy}
+-->
+<script>
+  $.getJSON('/assets/data/modeling-methods.json', function (data) {
+    const graph = new G6.TreeGraph({
+      container: 'mountNode',
+      width: window.innerWidth,
+      height: window.innerHeight,
+      pixelRatio: 2,
+      linkCenter: true,
+      modes: {
+        default: [{
+          type: 'collapse-expand',
+          onChange(item, collapsed) {
+            const data = item.get('model').data;
+            data.collapsed = collapsed;
+            return true;
+          }
+        }, 'drag-canvas', 'zoom-canvas']
+      },
+      defaultNode: { size: 16},
+      nodeStyle: {
+        default: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        }
+      },
+      edgeStyle: {
+        default: {
+          stroke: '#A3B1BF'
+        }
+      },
+      layout: function(data) {
+        const result =  Hierarchy.dendrogram(data, {
+          direction: 'LR', // H / V / LR / RL / TB / BT
+          nodeSep: 20,
+          rankSep: 100
+        });
+        G6.Util.radialLayout(result);
+        return result;
+      }
+    });
+    graph.data(data);
+    graph.render();
+    graph.fitView();
+  });
+</script>

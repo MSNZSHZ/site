@@ -3,6 +3,7 @@ index: 3
 title: 粒子传输效果
 resource:
   jsFiles:
+    - https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js
     - ${url['g6-plugins']}
     - ${url.jquery}
     - ${url.d3}
@@ -71,7 +72,7 @@ screenshot: https://gw.alipayobjects.com/zos/rmsportal/hgzuInAALrKDRGsKxcOt.png
             const maxCount = 20 * (index + 1);
             const minCount = 2 * (index + 1);
             const nodeCount = parseInt(Math.random() * maxCount);
-      
+
             for (let index = 0; index < nodeCount; index++) {
               data.nodes.push({
                 size: 4 + 6 * Math.random(),

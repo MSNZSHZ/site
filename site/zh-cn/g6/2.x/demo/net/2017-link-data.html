@@ -3,6 +3,7 @@ index: 4
 title: 2017 Link Data
 resource:
   jsFiles:
+    - https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js
     - ${url['g6-plugins']}
     - ${url.jquery}
 screenshot: https://cdn.nlark.com/yuque/0/2018/gif/93506/1535804360170-d3c64356-38d9-40af-a111-b39c8232e67e.gif
@@ -17,7 +18,7 @@ plotDescription: 详见：http://linkdata.org/
       height: window.innerHeight, // 画布高
       plugins: [
         new G6.Plugins['tool.highlightSubgraph'],
-        new G6.Plugins['tool.fisheye'], 
+        new G6.Plugins['tool.fisheye'],
       ],
       fitView:'autoZoom',
     });

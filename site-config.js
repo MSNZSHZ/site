@@ -5,7 +5,8 @@ var resolve = path.resolve;
 var pkg = require('./package.json');
 const g6Url = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-';
 const g6EditorUrl = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-editor-';
-const g6Version = '2.2.0';
+const g6OldVersion = '2.2.6';
+const g6Version = '3.0.0';
 const g6EditorVersion = '1.2.0';
 module.exports = {
     url: {
@@ -22,7 +23,8 @@ module.exports = {
         'l7-tiff':'https://gw.alipayobjects.com/os/rmsportal/IZjNFjhPTLlgucewdgAi.js',
         'f2-all': 'https://gw.alipayobjects.com/os/antv/assets/f2/3.3.7/f2-all.min.js',
         g6: g6Url + g6Version + '/build/g6.js',
-        'g6-plugins': g6Url + g6Version + '/build/plugins.js',
+        g6Minimap: g6Url + g6Version + '/build/minimap.js',
+        'g6-plugins': g6Url + g6OldVersion + '/build/plugins.js',
         'g6-editor-flow': g6EditorUrl + g6EditorVersion+'/build/flow.js',
         'g6-editor-flow-css': g6EditorUrl + g6EditorVersion+'/build/flow.css',
         'g6-editor-mind': g6EditorUrl + g6EditorVersion+'/build/mind.js',
@@ -35,7 +37,8 @@ module.exports = {
         katexCss: 'https://gw.alipayobjects.com/os/antv/assets/lib/katex-0.8.3/katex.min.css',
         lodash:   'https://gw.alipayobjects.com/os/antv/assets/lib/lodash-4.17.4.min.js',
         react: 'https://gw.alipayobjects.com/os/antv/assets/lib/react-16.4.0/react.production.min.js',
-        'react-dom': 'https://gw.alipayobjects.com/os/antv/assets/lib/react-16.4.0/react-dom.production.min.js'
+        'react-dom': 'https://gw.alipayobjects.com/os/antv/assets/lib/react-16.4.0/react-dom.production.min.js',
+        hierarchy:   'https://gw.alipayobjects.com/os/antv/pkg/_antv.hierarchy-0.4.0/build/hierarchy.js'
     },
     assets: '/assets',
     base: '/',

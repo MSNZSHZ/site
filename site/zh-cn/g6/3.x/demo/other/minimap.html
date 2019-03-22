@@ -1,0 +1,43 @@
+<!--
+index: 1
+title: 缩略图
+resource:
+  jsFiles:
+   - ${url.jquery}
+   - ${url.g6Minimap}
+screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1553163228144-23d761cf-1705-4705-bec2-2eca7fffd9b4.gif
+-->
+<style>
+    .g6-minimap {
+        position: absolute;
+        right: 0;
+        top: 6px;
+        background-color: #fff;
+    }
+</style>
+<script>
+  const minimap = new Minimap({ size: [ window.innerWidth / 4, window.innerHeight / 4 ] });
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    plugins: [ minimap ],
+    defaultNode: {
+      size: [40, 40]
+    },
+    modes: {
+      default: [ 'zoom-canvas', 'drag-canvas' ]
+    }
+  });
+  $.getJSON('/assets/data/g6-construction.json', data => {
+    data.nodes.forEach(node => {
+      node.id += ''
+    });
+    data.edges.forEach(edge => {
+      edge.source += '';
+      edge.target += '';
+    });
+    graph.read(data);
+  });
+
+</script>

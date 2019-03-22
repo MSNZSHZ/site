@@ -1,0 +1,31 @@
+<!--
+index: 0
+title: 内置节点
+resource:
+  jsFiles:
+screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1553151407938-961459e2-6998-4307-b55d-22b7ee3c574f.png
+-->
+<script>
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    defaultNode: {
+      size: [40, 40]
+    },
+    modes: {
+      default: [ 'zoom-canvas', 'drag-canvas' ]
+    }
+  });
+  graph.addItem('node', { id: 'circle', shape:'circle', label: 'circle', x: 100, y: 100 });
+  graph.addItem('node', { id: 'rect', shape: 'rect', label: 'rect', labelCfg: { position: 'top' }, x: 450, y: 80, color: '#fe8550' });
+  graph.addItem('node', { id: 'ellipse', shape: 'ellipse', label: 'ellipse', labelCfg: { position: 'right' }, x: 200, y: 200, style: { fill: '#1890FF', stroke: '#1890FF' }, size: [60, 40] });
+  graph.addItem('node', { id: 'image', shape: 'image', label: 'image', labelCfg: { position: 'bottom'}, img: '/assets/image/logo.png', x: 350, y: 300 });
+  graph.addItem('edge', { id: 'edge0', source: 'circle', target: 'rect', label: 'line' });
+  graph.addItem('edge', { id: 'edge1', source: 'circle', target: 'ellipse', shape: 'polyline', label: 'polyline', labelCfg: { position: 'center' }, controlPoints: [{ x: 100, y: 200 }]});
+  graph.addItem('edge', { id: 'edge2', source: 'ellipse', target: 'image', shape: 'cubic-vertical', labelCfg: { position: 'start', refY: -15 }, label: 'cubic-vertical', size: 2 });
+  graph.addItem('edge', { id: 'edge3', source: 'ellipse', target: 'rect', shape: 'quadratic', label: 'quadratic', controlPoints: [ { x: 300, y: 80 } ], labelCfg: { autoRotate: true }, });
+  graph.addItem('edge', { id: 'edge4', source: 'rect', target: 'rect', shape: 'loop', loopCfg: { dist: 60, position: 'bottom' }, size: 2, style: { endArrow: true } });
+  graph.addItem('edge', { id: 'edge4', source: 'rect', target: 'rect', shape: 'loop', loopCfg: { dist: 90, position: 'bottom' }, label: 'loop', labelCfg: { refY: -10 }, size: 2, style: { endArrow: true } });
+  graph.addItem('edge', { id: 'edge5', source: { x: 450, y: 200 }, target: { x: 400, y: 300 }, label: 'standalone line', labelCfg: { autoRotate: true, refY: 10 } });
+</script>
