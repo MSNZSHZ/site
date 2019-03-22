@@ -38,7 +38,7 @@ clients:
   - img: ${assets}/image/home/g6/tianmao.png
 resource:
   jsFiles:
-    - ${url.g6}
+    - https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js
     - ${url['g6-plugins']}
     - ${url.d3}
 -->
@@ -51,7 +51,7 @@ resource:
         <h1>G6 图可视化引擎</h1>
         <p class="main-info">G6 是一个简单、易用、完备的图可视化引擎，它在高定制能力的基础上，提供了一系列设计优雅、便于使用的图可视化解决方案。能帮助开发者搭建属于自己的图 图分析 应用或是 图编辑器 应用。</p>
         <a href="{{ products.g6.links.demo.href }}" class="btn btn-primary btn-lg btn-round-link">{{ resource.translate.demo }}</a>
-        <a href="https://www.yuque.com/antv/g6/quick-start#_%E5%AE%89%E8%A3%85" class="btn btn-light border btn-lg btn-round-link">{{ resource.translate.downloadAndUse }}</a>
+        <a href="hhttps://www.yuque.com/antv/g6/intro" class="btn btn-light border btn-lg btn-round-link">{{ resource.translate.downloadAndUse }}</a>
         <iframe class="btn-round-link btn btn-light btn-lg github-btn" src="https://ghbtns.com/github-btn.html?user=antvis&repo=g6&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
       </div>
       <div class="col-md-7">
