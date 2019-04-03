@@ -1,0 +1,95 @@
+<!--
+index: 0
+title: 词云
+screenshot: https://cdn.nlark.com/yuque/0/2019/png/98090/1554262050276-d1d040f7-6407-4384-9d18-1c72b73f78fb.png
+resource:
+  jsFiles:
+    - ${url.dataSet}
+-->
+
+<script>
+// 需要使用 @antv/data-set 对数据进行布局处理
+const Util = F2.Util;
+
+// 获取 text 文本的图形属性
+function getTextAttrs(cfg) {
+  return Util.mix({}, {
+    fillOpacity: cfg.opacity,
+    fontSize: cfg.origin._origin.size,
+    rotate: (cfg.origin._origin.rotate * Math.PI) / 180,
+    text: cfg.origin._origin.text,
+    textAlign: 'center',
+    fontFamily: cfg.origin._origin.font,
+    fill: cfg.color,
+    textBaseline: 'Alphabetic'
+  }, cfg.style);
+}
+
+// 给point注册一个词云的shape
+F2.Shape.registerShape('point', 'cloud', {
+  draw(cfg, container) {
+    const attrs = getTextAttrs(cfg);
+    const x = cfg.x;
+    const y = this._coord.y.start - cfg.y;
+    return container.addShape('text', {
+      attrs: Util.mix(attrs, {
+        x,
+        y
+      })
+    });
+  }
+});
+
+$.getJSON('/assets/data/f2/world-population.json', (data) => {
+  const dv = new DataSet.View().source(data);
+  const range = dv.range('value');
+  const min = range[0];
+  const max = range[1];
+  const MAX_FONTSIZE = 36; // 最大的字体
+  const MIN_FONTSIZE = 12; // 最小的字体
+  const canvasWidth = $('#mountNode').width(); // 获取画布宽度
+  const canvasHeight = $('#mountNode').height(); // 获取画布高度
+  // 生成词云的布局
+  dv.transform({
+    type: 'tag-cloud',
+    fields: ['x', 'value'],
+    size: [canvasWidth, canvasHeight], // 同 canvas 画布保持一致
+    font: 'Verdana',
+    padding: 0,
+    timeInterval: 5000, // max execute time
+    rotate: function rotate() {
+      let random = ~~(Math.random() * 4) % 4;
+      if (random == 2) {
+        random = 0;
+      }
+      return random * 90; // 0, 90, 270
+    },
+    fontSize: function fontSize(d) {
+      if (d.value) {
+        return (d.value - min) / (max - min) * (MAX_FONTSIZE - MIN_FONTSIZE) + MIN_FONTSIZE;
+      }
+      return 0;
+    }
+  });
+
+  const chart = new F2.Chart({
+    id: 'mountNode',
+    padding: 0,
+    pixelRatio: window.devicePixelRatio
+  });
+  chart.source(dv.rows, {
+    x: {
+      nice: false
+    },
+    y: {
+      nice: false
+    }
+  });
+  chart.legend(false);
+  chart.axis(false);
+  chart.tooltip(false);
+
+  chart.point().position('x*y').color('category').shape('cloud');
+  chart.render();
+});
+</script>
