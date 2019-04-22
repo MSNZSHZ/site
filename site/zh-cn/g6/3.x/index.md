@@ -20,13 +20,6 @@ featuresCards:
   - img: ${assets}/image/home/features-powerful.svg
     title: 简单易用，扩展灵活
     description: 精心设计的简单、灵活、高可拓展的接口，满足你的无限创意。
-usecases:
-  - img: ${assets}/image/home/g6/g6-editor.png
-    title: G6-Editor
-    description: G6-Editor 是 G6 的上层建筑，是一款具备极致体验的图编辑器。开发者基于它可轻松搭建流程建模、拓扑建模、脑图建模等编辑器。
-    relate: true
-    name: 文档仓库
-    link: https://www.yuque.com/antv/g6-editor
 clients:
   - img: ${assets}/image/home/g6/alipay.png
   - img: ${assets}/image/home/g6/aliyun.png
@@ -51,7 +44,7 @@ resource:
         <h1>G6 图可视化引擎</h1>
         <p class="main-info">G6 是一个简单、易用、完备的图可视化引擎，它在高定制能力的基础上，提供了一系列设计优雅、便于使用的图可视化解决方案。能帮助开发者搭建属于自己的图 图分析 应用或是 图编辑器 应用。</p>
         <a href="{{ products.g6.links.demo.href }}" class="btn btn-primary btn-lg btn-round-link">{{ resource.translate.demo }}</a>
-        <a href="hhttps://www.yuque.com/antv/g6/intro" class="btn btn-light border btn-lg btn-round-link">{{ resource.translate.downloadAndUse }}</a>
+        <a href="https://www.yuque.com/antv/g6/intro" class="btn btn-light border btn-lg btn-round-link">{{ resource.translate.downloadAndUse }}</a>
         <iframe class="btn-round-link btn btn-light btn-lg github-btn" src="https://ghbtns.com/github-btn.html?user=antvis&repo=g6&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
       </div>
       <div class="col-md-7">
@@ -77,6 +70,7 @@ resource:
 </section>
 
 <!-- 第三屏：使用案例 -->
+{% if usecases %}
 <section class="use-cases">
   <div class="container slider">
     {% for card in usecases %}
@@ -105,6 +99,7 @@ resource:
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
 <!-- 第四屏 使用 app -->
 <section class="clients-container">

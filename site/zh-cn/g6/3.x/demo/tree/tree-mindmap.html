@@ -49,11 +49,11 @@ resource:
     });
     graph.data(data);
     graph.render();
-    const root = graph.find('node', node => { return node.get('model').data.name === 'Modeling Methods' });
+    const root = graph.find('node', node => { return node.get('model').data.id === 'Modeling Methods' });
     const x = root.get('model').x;
     graph.getNodes().forEach(node => {
       const model = node.get('model');
-      model.label = model.data.name;
+      model.label = model.data.id;
       model.labelCfg = { offset: 10, style: { fill: '#666' } };
       if (model.children && model.children.length > 0) {
         model.labelCfg.position = 'left';
