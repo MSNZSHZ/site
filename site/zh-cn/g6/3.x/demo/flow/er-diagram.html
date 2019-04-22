@@ -20,30 +20,33 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989207892-8d8977ac
         }
       });
       const center = keyShape.getPoint(0.5);
-      const points = keyShape.getStartTangent();
-      const angle = Math.atan((points[1][1] - points[0][1]) / (points[1][0] - points[0][0]));
       const shapeContainer = group.addGroup();
-      shapeContainer.transform([
-        ['t', -center.x, -center.y],
-        ['r', angle],
-        ['t', center.x, center.y]
-      ]);
-      shapeContainer.addShape('text', {
+
+      let point = G6.Util.getLabelPosition(keyShape, 0, 10, 4, true);
+      group.addShape('text', {
         attrs: {
           text: cfg.sourceEntity,
-          x: center.x - 50,
-          y: center.y,
+          x: point.x,
+          y: point.y,
+          rotate: point.rotate,
           fill: '#666'
         }
       });
-      shapeContainer.addShape('text', {
+      point = G6.Util.getLabelPosition(keyShape, 1, -15, 4, true);
+      group.addShape('text', {
         attrs: {
           text: cfg.targetEntity,
-          x: center.x + 50,
-          y: center.y,
-          fill: '#666'
+          x: point.x,
+          y: point.y,
+          fill: '#666',
+          rotate: point.rotate
         }
       });
+      shapeContainer.transform([
+        ['t', -center.x, -center.y],
+        ['r', point.angle],
+        ['t', center.x, center.y]
+      ]);
       shapeContainer.addShape('path', {
         attrs: {
           path: [
@@ -68,7 +71,6 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989207892-8d8977ac
         }
       });
       return keyShape;
-      console.log(point, tangent);
     }
   });
   const graph = new G6.Graph({
@@ -76,7 +78,7 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989207892-8d8977ac
     width: 800,
     height: 500,
     modes: {
-      default: [ 'drag-node']
+      default: [ 'drag-node', 'drag-canvas', 'zoom-canvas']
     }
   });
   const data = {
@@ -146,22 +148,22 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989207892-8d8977ac
     }, {
       id: 'employee',
       label: 'employee',
-      x: 180,
-      y: 300,
+      x: 380,
+      y: 380,
       shape: 'rect',
       size: [60, 40]
     }, {
       id: 'employee_id',
       label: 'employee_id',
-      x: 280,
-      y: 360,
+      x: 320,
+      y: 440,
       shape: 'ellipse',
       size: [80, 40]
     }, {
       id: 'title',
       label: 'title',
-      x: 80,
-      y: 360,
+      x: 440,
+      y: 440,
       shape: 'ellipse',
       size: [80, 40]
     }],

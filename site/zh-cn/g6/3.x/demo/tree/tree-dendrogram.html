@@ -49,7 +49,7 @@ resource:
     graph.render();
     graph.getNodes().forEach(node => {
       const model = node.get('model');
-      model.label = model.data.name;
+      model.label = model.data.id;
       model.labelCfg = { offset: 10, style: { fill: '#666' } };
       if (model.children && model.children.length > 0) {
         model.labelCfg.position = 'left';
