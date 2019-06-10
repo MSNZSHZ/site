@@ -179,6 +179,7 @@ const data = {
         { name: '巴思'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/basi.png'     , weibo: 'https://weibo.com/145643593'        , github: ''                                } ,
         { name: '沉鱼'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/chenyu.png'   , weibo: ''                                   , github: ''                                } ,
         { name: '董珊珊', jobTitle: '设计师'     , avatar: '${assets}/image/members/shanshan.png' , weibo: ''                                   , github: ''                                } ,
+        { name: '顾己'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/guji.png'   , weibo: ''                                   , github: 'https://github.com/Esorakouki'                                } ,
         { name: '顾倾'  , jobTitle: '设计师'     , avatar: '${assets}/image/members/guqing.jpg'   , weibo: ''                                   , github: ''                                } ,
         { name: '画康'  , jobTitle: '设计师'     , avatar: '${assets}/image/members/huakang.png'  , weibo: 'https://weibo.com/u/1985143287'     , github: ''                                } ,
         { name: '尽白'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/jinbai.jpg'   , weibo: 'https://www.weibo.com/u/1736341270' , github: 'https://github.com/aa1011372655' } ,
