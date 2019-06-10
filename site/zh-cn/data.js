@@ -183,6 +183,7 @@ const data = {
         { name: '画康'  , jobTitle: '设计师'     , avatar: '${assets}/image/members/huakang.png'  , weibo: 'https://weibo.com/u/1985143287'     , github: ''                                } ,
         { name: '尽白'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/jinbai.jpg'   , weibo: 'https://www.weibo.com/u/1736341270' , github: 'https://github.com/aa1011372655' } ,
         { name: '绝云'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/jueyun.png'   , weibo: 'https://weibo.com/omosirovincent'   , github: 'https://github.com/leungwensen'  } ,
+        { name: '聚则'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/juze.png'     , weibo: ''                                   , github: 'https://github.com/baizn'        } ,
         { name: '陆沉'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/luchen.jpeg'  , weibo: ''                                   , github: ''                                } ,
         { name: '罗宪'  , jobTitle: '动效设计师' , avatar: '${assets}/image/members/luoxian.png'  , weibo: ''                                   , github: ''                                 } ,
         { name: '米法'  , jobTitle: '工程师'     , avatar: '${assets}/image/members/mifa.png'     , weibo: ''                                   , github: 'https://github.com/paleface001'  } ,
