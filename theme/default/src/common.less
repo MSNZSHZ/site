@@ -358,7 +358,7 @@ header.navbar {
     color: rgba(255,255,255,0.65);
   }
   #query::-webkit-input-placeholder {
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
   }
 }
 
@@ -370,7 +370,12 @@ header.navbar {
 @media only screen and (max-width: @screen-md) {
 
   header.navbar {
-    padding: 16px;
+    padding: 15px;
+
+    /* 移动端上导航栏按钮和GitHub入口位置冲突 */
+    .github-corner {
+      display: none;
+    }
   }
   .card-wrapper {
     margin: 16px auto;

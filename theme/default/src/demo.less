@@ -30,6 +30,9 @@ html, body {
     border-right: 2px solid #DEDEEB;
     cursor: col-resize;
   }
+  .lSSlideWrapper {
+    overflow: scroll !important;
+  }
   .col {
     margin: 0;
     padding: 0;
@@ -526,6 +529,10 @@ html, body {
   }
 
   .demo-container {
+    .content-container {
+      width: 100% !important;
+      flex-basis: auto !important;
+    }
     .flex-row {
       flex-direction: column !important;
     }
@@ -535,6 +542,15 @@ html, body {
     .col.menu {
       border-right: none;
     }
+  }
+
+  #resize-handler {
+    display: none;
+  }
+
+  #demo-preview {
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
   #preview {

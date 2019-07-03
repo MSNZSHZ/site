@@ -458,3 +458,31 @@ h2, h3, h4, h5, h6 {
     height: 540px;
   }
 }
+
+@media only screen and (max-width: @screen-md) {
+  .navbar-collapse.collapse.show {
+    margin-bottom: 65px; 
+  }
+
+  .homepage {
+    color: #fff;
+    z-index: 1;
+    background-color: transparent !important;
+  
+    #sub-site-nav .nav-link {
+      color: #314659 !important;
+    }
+  
+    #navbarHeader .nav-separator {
+      border-left: 1px solid #fff;
+    }
+  
+    #btn-search .iconfont {
+      color: #314659 !important;
+    }
+  
+    #navbarHeader .navbar-nav .nav-link, #sub-site-nav .navbar-nav .nav-link {
+      color: #314659 !important;
+    }
+  }
+}

@@ -46,7 +46,7 @@ if ($iframeContainer.hasClass('g2')) {
   const slider = $('#slider').lightSlider({
     item: 7,
     slideMove: 7,
-    autoWidth: false,
+    autoWidth: true,
     slideMargin: 20,
     controls: false,
     onSliderLoad: function() {
