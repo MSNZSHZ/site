@@ -9,6 +9,21 @@ subCat: 组件
 -->
 <script>
 const data = [];
+const now = new Date();
+const time = now.getTime();
+const value1 = ~~30 + Math.random() * 50;
+const direction = Math.random() > 0.5 ? 1 : -1;
+const value2 = value1 + Math.random() * 20 * direction;
+data.push({
+  time: time,
+  value: value2,
+  type: 'yesterday'
+});
+data.push({
+  time: time,
+  value: value1,
+  type: 'today'
+});
 const chart = new G2.Chart({
      container: 'mountNode',
      forceFit: true,
