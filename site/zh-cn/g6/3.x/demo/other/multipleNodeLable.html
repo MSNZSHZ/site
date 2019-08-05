@@ -1,0 +1,115 @@
+<!--
+index: 2
+title: 节点上多Label
+resource:
+  jsFiles:
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*Shy0SJTYv2oAAAAAAAAAAABkARQnAQ
+-->
+<script>
+  /**
+   * 自定义节点示例
+   * 演示自定义节点上绘制多个label
+   * by 长哲
+   */
+
+  // 自定义节点
+  G6.registerNode(
+    "multipleLabelsNode",
+    {
+      // 绘制节点
+      draw(cfg, group) {
+        const shape = this.drawShape(cfg, group);
+        if (cfg.label && cfg.label.length) {
+          this.drawLabel(cfg, group);
+        }
+        return shape;
+      },
+
+      // 绘制label
+      drawLabel(cfg, group) {
+        const size = this.getSize(cfg);
+        const width = size[0];
+        // const height = size[1];
+        const { label } = cfg;
+        // 绘制第一个label
+        group.addShape("text", {
+          attrs: {
+            text: label[0] || "",
+            x: 0 - width / 2 + 5,
+            y: 0,
+            fill: "#595959",
+            textAlign: "left",
+            textBaseline: "middle"
+          }
+        });
+        if (label.length > 1) {
+          // 绘制第二个label
+          group.addShape("text", {
+            attrs: {
+              text: label[1] || "",
+              x: -5,
+              y: 0,
+              fill: "#f00",
+              textAlign: "left",
+              textBaseline: "middle",
+              fontWeight: "bold"
+            }
+          });
+        }
+      }
+    },
+    "circle"
+  );
+
+  function initGraph() {
+    const data = {
+      nodes: [
+        {
+          id: "node1",
+          x: 100,
+          y: 200,
+          label: ["node1", "label1"],
+          size: 100,
+          shape: "multipleLabelsNode"
+        },
+        {
+          id: "node2",
+          x: 300,
+          y: 200,
+          label: ["node2", "label2"],
+          size: 100,
+          shape: "multipleLabelsNode"
+        }
+      ],
+      edges: [
+        {
+          source: "node1",
+          target: "node2"
+        }
+      ]
+    };
+
+    const graph = new G6.Graph({
+      container: "mountNode",
+      width: window.innerWidth,
+      height: window.innerHeight,
+      modes: {
+        default: [
+          "drag-canvas",
+          {
+            type: "drag-node",
+            delegate: false
+          },
+          {
+            type: "zoom-canvas",
+            sensitivity: 0.5
+          }
+        ]
+      }
+    });
+
+    graph.data(data);
+    graph.render();
+  }
+  initGraph();
+</script>

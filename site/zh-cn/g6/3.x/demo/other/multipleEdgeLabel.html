@@ -1,0 +1,111 @@
+<!--
+index: 2
+title: 边上多Label
+resource:
+  jsFiles:
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*awURRLVDXDAAAAAAAAAAAABkARQnAQ
+-->
+<script>
+  /**
+   * 自定义边示例
+   * 演示自定义边上绘制多个label
+   * by 长哲
+   */
+
+  // 注册自定义边
+  G6.registerEdge('multipleLabelsEdge', {
+    draw(cfg, group) {
+      const { startPoint, endPoint } = cfg;
+      // 绘制边（直线）
+      const shape = group.addShape('path', {
+        attrs: {
+          stroke: cfg.color || '#000',
+          path: [
+            ['M', startPoint.x, startPoint.y],
+            ['L', endPoint.x, endPoint.y]
+          ]
+        }
+      });
+      if (cfg.label && cfg.label.length) {
+        // 绘制左边的label
+        group.addShape('text', {
+          attrs: {
+            text: cfg.label[0],
+            fill: '#595959',
+            textAlign: 'start',
+            textBaseline: 'middle',
+            x: startPoint.x,
+            y: startPoint.y - 10,
+          }
+        });
+        if (cfg.label.length > 1) {
+          // 绘制右边的label
+          group.addShape('text', {
+            attrs: {
+              text: cfg.label[1],
+              fill: '#595959',
+              textAlign: 'end',
+              textBaseline: 'middle',
+              x: endPoint.x,
+              y: endPoint.y - 10
+            }
+          });
+        }
+      }
+      // 返回边的keyShape
+      return shape;
+    }
+  });
+
+  function initGraph(container) {
+    const data = {
+      nodes: [
+        {
+          id: "node1",
+          x: 100,
+          y: 100,
+          label: "node1"
+        },
+        {
+          id: "node2",
+          x: 300,
+          y: 100,
+          label: "node2"
+        }
+      ],
+      edges: [
+        {
+          source: "node1",
+          target: "node2",
+          shape: "multipleLabelsEdge",
+          // 定义边左侧和右侧的label
+          label: ['hello', 'world'],
+          // 定义边的颜色
+          color: '#00f',
+        }
+      ]
+    };
+
+    const graph = new G6.Graph({
+      container: "mountNode",
+      width: window.innerWidth,
+      height: window.innerHeight,
+      fitView: true,
+      modes: {
+        default: [{
+          type: 'drag-node',
+          delegate: false,
+        }, 'drag-canvas', {
+          type: 'zoom-canvas', 
+          sensitivity: 0.5
+        }]
+      }
+    });
+    graph.data(data);
+    graph.render();
+
+    return graph;
+  }
+
+  initGraph();
+</script>
