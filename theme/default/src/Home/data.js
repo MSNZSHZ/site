@@ -14,10 +14,10 @@ export const page1 = [
   {
     img: `${assets}/image/home/intro-g6.svg`,
     title: 'G6',
-    href: `${base}zh-cn/g6/2.x/index.html`,
+    href: `${base}zh-cn/g6/3.x/index.html`,
     description: ' 是一套便捷、动态和富有交互的流程图和关系分析的图表库。',
     links: [
-      { text: '图表示例', href: '/zh-cn/g6/1.x/demo/index.html' },
+      { text: '图表示例', href: '/zh-cn/g6/3.x/demo/index.html' },
       { text: 'API 文档', href: 'https://www.yuque.com/antv/g6' },
     ],
   },
