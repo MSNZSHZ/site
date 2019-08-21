@@ -1,0 +1,47 @@
+<!--
+index: 1
+title: 德国人口迁徙
+intro: 2016年的德国东西两个地区人口迁移情况
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*a4NlR64hz1IAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 110.19382669582967, 40.258134 ],
+  pitch: 0,
+  zoom: 3,
+  hash:true,
+});
+// 加载图层需要sceneload完成之后
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/basement_prod/49a796db-944b-4c35-aa97-1015f0a407f1.json', data => {
+    data.features = data.features.map(fe=>{
+      if(fe.properties.saldo < 0 ) {
+        fe.geometry.coordinates = fe.geometry.coordinates.reverse();
+      }
+      return fe;
+    });
+   const layer =  scene.LineLayer({
+      zIndex: 2
+    })
+     .source(data)
+    .shape('line')
+    .size('saldo', [1, 2])
+    .color('saldo', (v)=>{
+     return  v < 0 ? 'rgb(60,255,255)':'rgb(255,255,60)';
+    }) 
+    .animate({
+        enable:true,
+        interval:0.1,
+        duration:3,
+        trailLength:0.1
+        })
+    .style({
+      opacity:0.8,
+    })
+    .render();
+   layer.fitBounds();
+  });
+});
+</script>

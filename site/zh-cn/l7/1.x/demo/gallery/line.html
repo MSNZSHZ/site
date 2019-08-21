@@ -1,0 +1,38 @@
+<!--
+index: 4
+title: 线轨迹动画
+intro: 杭州市道路数据添加轨迹动画
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*UGqXS7PKWKIAAAAAAAAAAABkARQnAQ
+-->
+ <style>
+	#map { position:absolute; top:0; bottom:0; width:100%; }
+ </style>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 16
+});
+// 加载图层需要sceneload完成之后
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/basement_prod/40ef2173-df66-4154-a8c0-785e93a5f18e.json', data => {
+    scene.LineLayer({
+      zIndex: 2
+    })
+    .source(data)
+    .size(1)
+    .shape('line')
+    .color('#ff893a')
+    .animate({
+        enable:true,
+        interval:0.4,
+        duration:1,
+        trailLength:0.8
+        })
+    .render();
+  });
+
+});
+</script>

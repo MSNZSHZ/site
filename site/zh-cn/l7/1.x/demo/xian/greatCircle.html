@@ -1,0 +1,40 @@
+<!--
+index: 1
+title: 绘制大圆航线
+intro: 绘制地球大圆航线
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*QLoOTKSwGp8AAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+ center: [105.2825, 34.9],
+  pitch: 0,
+  zoom: 4
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/rmsportal/UEXQMifxtkQlYfChpPwT.txt', data => {
+    
+    scene.LineLayer({
+      zIndex: 2
+    })
+     .source(data, { 
+       parser:{
+          type: 'csv',
+          x: 'lng1',
+          y: 'lat1',
+          x1: 'lng2',
+          y1: 'lat2'
+       }
+      
+     })
+    .shape('greatCircle')
+    .size(0.8)
+    .color('rgb(13,64,140)') 
+    .style({
+      opacity:0.6,
+    })
+    .render();
+  });
+});
+</script>

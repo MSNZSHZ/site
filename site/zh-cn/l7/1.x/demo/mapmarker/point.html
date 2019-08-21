@@ -1,0 +1,62 @@
+<!--
+index: 3
+title: 自定义marker样式
+intro: 自定义marker样式
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*6SYoSKGoRC0AAAAAAAAAAABkARQnAQ
+-->
+<style> 
+.lableclass {
+    position: absolute;
+    display: inline;
+    cursor: pointer;
+    background: rgb(255, 228, 120); 
+    border: none; padding: 4px;
+    white-space: nowrap; 
+    font: bold 12px/18px arial, sans-serif; 
+    color: rgb(51, 51, 51);
+    box-shadow: rgb(153, 153, 153) 1px 1px 2px;
+    border-radius: 4px;
+    width: 18px; 
+    height: 18px; 
+    text-align: center; 
+    user-select: none;
+}
+</style>
+
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 5
+});
+scene.on('loaded',()=>{
+ $.get('https://gw.alipayobjects.com/os/basement_prod/67f47049-8787-45fc-acfe-e19924afe032.json', data => {
+   for(var i =0; i<data.length;i++) {
+      if(data[i].g!=='1') continue;
+       const el = document.createElement('label');
+       el.className = 'lableclass';
+       el.textContent = data[i].v;
+       el.style.background = getColor( data[i].v);
+  
+
+      new L7.Marker({element:el})
+            .setLnglat([data[i].x*1, data[i].y ])
+            .addTo(scene);
+   }
+
+ });
+});
+function getColor(v) {
+return v > 50 ? '#800026' :
+      v > 40  ? '#BD0026' :
+      v > 30  ? '#E31A1C' :
+      v > 20  ? '#FC4E2A' :
+      v > 10   ? '#FD8D3C' :
+      v > 5   ? '#FEB24C' :
+      v > 0   ? '#FED976' :
+                '#FFEDA0';
+}
+
+</script>

@@ -1,0 +1,42 @@
+<!--
+index: 1
+title: 数据过滤显示
+intro: 用于控制的数据的显示区间
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*1X1BQalkbvoAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 113.4792, 23.1550 ],
+  pitch: 0,
+  zoom: 10
+});
+
+scene.on('loaded',()=>{
+
+$.getJSON('https://gw.alipayobjects.com/os/basement_prod/4db16ae9-0514-4ff3-82be-b9ee28c96e98.json', city => {
+  const layer = scene.PolygonLayer()
+    .source(city)
+    .color('unit_price',['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'].reverse())
+    .shape('fill')
+    .active(false)
+    .style({
+      opacity: 1
+    })
+    .render();
+   scene.PolygonLayer()
+    .source(city)
+    .color('#fff')
+    .shape('line')
+    .style({
+      opacity: 1
+    })
+    .render();
+   
+   layer.filter('unit_price', (v)=>{
+     return v > 30000;
+   }).render();
+});
+});
+</script>

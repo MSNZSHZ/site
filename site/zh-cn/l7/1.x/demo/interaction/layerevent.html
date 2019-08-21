@@ -1,0 +1,47 @@
+<!--
+index: 1
+title: 图层事件
+intro: 鼠标移动显示popup
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*9mpFTaPRvaEAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 116.3237, 39.8829 ],
+  pitch: 0,
+  zoom: 9
+});
+
+scene.on('loaded',()=>{
+
+$.getJSON('https://gw.alipayobjects.com/os/basement_prod/1d27c363-af3a-469e-ab5b-7a7e1ce4f311.json', city => {
+  const layer = scene.PolygonLayer()
+    .source(city)
+    .color('unit_price',['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'].reverse())
+    .shape('fill')
+    .active(true)
+    .style({
+      opacity: 1
+    })
+    .render();
+    scene.PolygonLayer()
+    .source(city)
+    .color('#fff')
+    .shape('line')
+    .style({
+      opacity: 1
+    })
+    .render();
+     const popup = new L7.Popup();
+    layer.on('mousemove',(e)=>{
+        const { lnglat, feature } = e;
+        const html =`
+        <p>板块：${feature.properties.name}</p>
+        <p>平均房价：${feature.properties.unit_price}</p>`;
+          popup.setLnglat([lnglat.lng, lnglat.lat])
+          .setHTML(html).addTo(scene);
+     });
+});
+});
+</script>

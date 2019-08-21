@@ -1,0 +1,44 @@
+<!--
+index: 1
+title: 热力图
+intro: 普通热力图加载
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*zwSiRKoVosUAAAAAAAAAAABkARQnAQ
+-->
+ <style>
+	#map { position:absolute; top:0; bottom:0; width:100%; }
+ </style>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 116.49434030056, 39.868073421167621, ],
+  pitch: 0,
+  zoom: 16
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/basement_prod/c3f8bda2-081b-449d-aa9f-9413b779205b.json', data => {
+    scene.HeatmapLayer({
+      zIndex: 2
+    })
+    .source(data,{
+      parser:{
+        type:'json',
+        x: 'lng',
+        y: 'lat'
+      }
+    })
+    .size('count', [ 0, 1 ]) // weight映射通道
+    .style({
+      intensity: 10,
+      radius: 20,
+      opacity:1,
+       rampColors: {
+        colors: [ '#2E8AE6', '#69D1AB', '#DAF291', '#FFD591', '#FF7A45', '#CF1D49' ],
+        positions: [ 0, 0.2, 0.4, 0.6, 0.8, 1.0 ]
+      }
+    })
+    .render();
+  });
+});
+
+</script>

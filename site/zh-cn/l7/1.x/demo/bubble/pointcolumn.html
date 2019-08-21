@@ -1,6 +1,7 @@
 <!--
-index: 1
-title: 3D柱状图
+index: 5
+title: 点图层3D柱状图
+intro: 3d柱状图展示文档差异
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/JitTudWEuAMBdhlAQSwq.png
 -->
 <script>
@@ -19,11 +20,13 @@ scene.on('loaded', () => {
       zIndex: 2
     })
     .source(data.list, {
-      type: 'array',
-      x: 'j',
-      y: 'w',
+      parser:{
+        type: 'json',
+        x: 'j',
+        y: 'w',
+      }
     })
-    .shape('3d:circle')
+    .shape('cylinder')
     .size('t',(level)=> {
       return [2,2,(level*3+20)];
     }) 

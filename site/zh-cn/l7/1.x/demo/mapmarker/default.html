@@ -1,0 +1,23 @@
+<!--
+index: 0
+title: 默认地图Marker
+intro: 地图默认Marker 可设置不同颜色
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*6kCFSZSYWGYAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 4
+});
+scene.on('loaded',()=>{
+   new L7.Marker({color: 'red'})
+            .setLnglat([112,32])
+            .addTo(scene);
+   new L7.Marker()
+            .setLnglat([114,36])
+            .addTo(scene);
+});
+</script>

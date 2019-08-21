@@ -1,0 +1,17 @@
+<!--
+index: 2
+title: 设置地图样式 
+intro: L7 内置 light 和dark两种地图样式，也可以传入高德地图样式
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*-1dTQqU4VWYAAAAAAAAAAABkARQnAQ
+-->
+<script>
+ const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'amap://styles/a92c23c68ca519ec235825c3be99462b', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 12
+});
+  scene.setMapStyle('dark');
+  // scene.setMapStyle('amap://styles/a92c23c68ca519ec235825c3be99462b'); 
+</script>

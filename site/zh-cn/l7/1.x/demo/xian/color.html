@@ -1,11 +1,9 @@
 <!--
-index: 1
+index: 2
+title: 线颜色映射
+intro: 数据驱动不同颜色显示线
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/aiOkgeJDQsAYkcFjAayM.png
-title: 等高线图
 -->
- <style>
-	#map { position:absolute; top:0; bottom:0; width:100%; }
- </style>
 <script>
 const scene = new L7.Scene({
   id: 'map',
@@ -20,13 +18,12 @@ scene.on('loaded', () => {
       zIndex: 2
     })
     .source(data)
-    .size('ELEV',(value)=>{
-        return [1,(value-1000)*7];
-    })
+    .size(1)
     .active(true)
     .shape('line')      
     .color('ELEV',["#E8FCFF", "#CFF6FF", "#A1E9ff", "#65CEF7", "#3CB1F0", "#2894E0", "#1772c2", "#105CB3", "#0D408C", "#002466"].reverse())
     .render();
+    
   });
 
 });

@@ -1,0 +1,48 @@
+<!--
+index: 5
+title: 获取地图信息
+intro: 调用scene相关方法可以获取地图缩放等级，倾角，中心，旋转角度
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*LqUeTI_p1zAAAAAAAAAAAABkARQnAQ
+-->
+ <style>
+ .mapinfo {
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: .25rem;
+    position: fixed;
+    top: 1rem;
+    background-color: white;
+    width: auto;
+    min-width: 10rem;
+    border-width: 0;
+    right: 1rem;
+  
+ }
+ .mapinfo p {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+ </style>
+<div class='mapinfo'>
+<p>地图缩放等级： <span id="zoom">_</span></p>
+<p>地图倾角： <span id="pitch">_</span></p>
+<p>地图中心点：<span id="center">_</span></p>
+<p>鼠标经纬度：<span id="lnglat">_</span></p>
+</div>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 10,
+  zoom: 12,
+});
+scene.on('loaded',()=> {
+  scene.on('mousemove',(e)=>{
+    document.querySelector("#zoom").innerText = scene.getZoom();
+    document.querySelector("#center").innerText = scene.getCenter().toString();
+    document.querySelector("#pitch").innerText = scene.getPitch();
+    document.querySelector("#lnglat").innerText = e.lnglat.toString();
+  });
+});
+</script>

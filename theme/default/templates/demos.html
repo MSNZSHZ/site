@@ -52,6 +52,7 @@
                                     data-recommend="{{demo.recommend}}"
                                 />
                             </a>
+                            
                             {% if demo.tags %}
                             <div class="card-body">
                                 {% for tag in demo.tags %}
@@ -59,6 +60,15 @@
                                 {% endfor %}
                             </div>
                             {% endif %}
+
+                                  {% if demo.intro %}
+                                <div class="card-description">
+                                 <p class ='intro_title'>{{demo.title}}</p>
+                                 <p>{{demo.intro}}</p>
+                                </div>
+                             {% endif %}
+                             
+
                         </div>
                     </div>
                     {% endfor %}

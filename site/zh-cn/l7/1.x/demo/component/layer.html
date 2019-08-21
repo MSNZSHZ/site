@@ -1,0 +1,56 @@
+<!--
+index: 1
+title: 添加图层列表图层
+intro: 图层列表用于控制图层的显示隐藏
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*-mF3QL3rP70AAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 12,
+  zoomControl:false,
+  scaleControl:false
+});
+
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/basement_prod/23064ba3-0974-4709-ba19-5f67ec5b7fae.json', data => {
+
+   const source = new L7.Source({data});
+    const layer = scene.PolygonLayer({
+      zIndex: 0
+    })
+    .source(source)
+    .shape('fill')
+    .color('#2F54EB')
+    .style({
+       opacity:0.5,
+     })
+    .render();
+    layer.fitBounds();
+    const layer2 = scene.LineLayer({
+      zIndex: 0
+    })
+    .source(source)
+    .shape('line')
+    .size(3)
+    .color('#fff')
+    .style({
+       opacity:1.0,
+     })
+    .render();
+
+  const overlayers = {
+    "围栏填充": layer,
+    "围栏边界": layer2,
+  };
+   new L7.Control.Layers({overlayers}).addTo(scene);
+  });
+
+ 
+});
+
+
+</script>

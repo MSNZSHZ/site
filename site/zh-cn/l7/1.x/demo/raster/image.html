@@ -1,6 +1,7 @@
 <!--
 index: 1
 title: 图片图层
+intro: 加载图片
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/kCcDcLEZCVAzGLYAvhdC.png
 
 -->
@@ -18,8 +19,10 @@ const scene = new L7.Scene({
 scene.on('loaded', () => {
   scene.ImageLayer().
       source('https://gw.alipayobjects.com/zos/rmsportal/FnHFeFklTzKDdUESRNDv.jpg',{
-       
-      extent: [ 121.1680, 30.2828, 121.3840, 30.4219 ]
+       parser:{
+            type:'image',
+            extent: [ 121.1680, 30.2828, 121.3840, 30.4219 ]
+       }
       })
       .style({
         opacity:1.0,

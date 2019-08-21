@@ -1,0 +1,43 @@
+<!--
+index: 0
+title: 3D 弧线图
+intro: 3D 弧线图
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*jWcVRIcuN-0AAAAAAAAAAABkARQnAQ
+resource:
+  jsFiles:
+    - ${url.turf}
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [110.2825, 39.9],
+  pitch: 70,
+  zoom: 3
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/rmsportal/UEXQMifxtkQlYfChpPwT.txt', data => {
+    
+    scene.LineLayer({
+      zIndex: 2
+    })
+     .source(data, { 
+       parser:{
+          type: 'csv',
+          x: 'lng1',
+          y: 'lat1',
+          x1: 'lng2',
+          y1: 'lat2'
+       }
+      
+     })
+    .shape('arc')
+    .size(0.8)
+    .color('rgb(13,64,140)') 
+    .style({
+      opacity:0.6,
+    })
+    .render();
+  });
+});
+</script>

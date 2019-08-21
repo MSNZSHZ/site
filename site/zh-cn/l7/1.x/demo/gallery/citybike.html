@@ -1,0 +1,122 @@
+<!--
+index: 1
+title: 城市自行车通勤
+intro: 城市自行车通勤
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*48ReRJDGCrQAAAAAAAAAAABkARQnAQ
+-->
+<script>
+function parseCSV (data) {
+  const lines = data.split('\n');
+  const header = lines[0];
+  const columns = header.split(',');
+  return lines.slice(1).filter(l => l).map(line => {
+    const obj = {};
+    line.split(',').forEach((value, i) => {
+      const name = columns[i];
+      obj[name] = value;
+    });
+    return obj;
+  });
+}
+
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ -73.910354, 40.805472  ],
+  pitch: 56,
+  zoom: 15.67,
+  rotation:255.1,
+});
+scene.on('loaded',()=>{
+  Promise.all([
+  fetch('https://gw.alipayobjects.com/os/basement_prod/9acd4831-5655-41a5-b0a0-831603e0092d.json').then(d => d.text()).then(JSON.parse),
+  fetch('https://gw.alipayobjects.com/os/basement_prod/dbe4e40b-3fbf-4a20-b36b-7a8bd3b8aef2.csv').then(d => d.text()),
+  fetch('https://gw.alipayobjects.com/os/basement_prod/89d20ef7-77df-44ca-a238-6e3679ab3ae4.csv').then(d => d.text())
+]).then(function onLoad ([coordinates, trips, stations]) {
+  const stationArray = parseCSV(stations);
+  const stationObj = {};
+  stationArray.forEach((st)=>{
+    stationObj[st.station_id] = {
+      x:st.longitude* 1,
+      y:st.latitude * 1,
+    };
+  });
+   const tripsArray = parseCSV(trips);
+   const triplines = [];
+   tripsArray.forEach(trip=>{
+    if(stationObj[trip.start_station] && stationObj[trip.end_station]) {
+     const line = {
+       x: stationObj[trip.start_station].x,
+       y: stationObj[trip.start_station].y,
+       x1: stationObj[trip.end_station].x,
+       y1: stationObj[trip.end_station].y,
+       duration: trip.duration,
+     };
+     triplines.push(line);
+    }
+   });
+
+  scene.LineLayer({
+      zIndex: 1
+    })
+    .source(triplines.slice(0, 1000),{
+      parser:{
+        type:'json',
+        x:'x',
+        y:'y',
+        x1:'x1',
+        y1:'y1'
+      }
+    })
+    .shape('arc')
+    .size(0.8)
+    .color('rgb(60,255,255)')
+    .style({
+       opacity:1.0,
+     }).animate({
+        enable: true,
+        interval: 0.1,
+        duration: 1,
+        trailLength: 0.05
+      }).render();
+
+
+ scene.LineLayer({
+      zIndex: 0
+    })
+    .source(coordinates)
+    .shape('line')
+    .size(1.5)
+    
+    .color('#eee')
+    .style({
+       opacity:0.9,
+     })
+    .render();
+   
+
+    const station =  scene.PointLayer({
+      zIndex: 0
+    })
+    .source(stations,{
+      parser:{
+        type:'csv',
+        x:'longitude',
+        y:'latitude'
+      }
+    })
+    .shape('circle')
+    .active(true)
+    .size(4)
+    .color('#fec44f')
+    .style({
+       opacity:0.9,
+     })
+    .render();
+     station.fitBounds();
+
+});
+
+
+});
+</script>

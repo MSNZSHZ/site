@@ -1,6 +1,7 @@
 <!--
-index: 1
-title: 点分布图
+index: 6
+title: 点图层海量点
+intro: 海量点数据可视化
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/jAopdiuTXPCccWeRTcsu.png
 -->
  <style>
@@ -22,9 +23,11 @@ scene.on('loaded', () => {
       zIndex: 2
     })
      .source(data, {
-       type: 'csv',
-       y: 'lat',
-       x: 'lng'
+       parser:{
+          type: 'csv',
+          y: 'lat',
+          x: 'lng'
+       }
      })
     .size(1.0)
    .color('#0D408C')

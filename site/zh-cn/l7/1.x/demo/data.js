@@ -58,7 +58,8 @@ demoDirs.forEach(function (dir) {
             meta = _renderMd.meta;
 
         var index = meta.index,
-            title = meta.title;
+            title = meta.title,
+            description = meta.intro;
 
         var name = basename(file, '.html');
         var href = base + 'zh-cn/l7/1.x/demo/' + category + '/' + name + '.html';
@@ -71,6 +72,7 @@ demoDirs.forEach(function (dir) {
             name: name,
             category: category,
             title: title,
+            intro:description,
             version: meta.version || 'l7',
             needIcon: meta.needIcon || false,
             selfContainer: meta.selfContainer || false

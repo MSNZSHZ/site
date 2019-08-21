@@ -1,0 +1,21 @@
+<!--
+index: 2
+title: 传入地图实例
+intro: 传入已有高德地图实例
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*8wY4TpGT54EAAAAAAAAAAABkARQnAQ
+-->
+<script>
+ var mapinstance = new AMap.Map('map',{
+      center: [ 120.19382669582967, 30.258134 ],
+      viewMode: '3D',
+      pitch: 0,
+      zoom: 12,
+      maxZoom:20,
+      minZoom:0,
+ });
+
+new L7.Scene({
+  mapStyle: 'dark', // 样式URL
+  map:mapinstance,
+});
+</script>
