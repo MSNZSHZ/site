@@ -97,7 +97,7 @@ variations:
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/iris.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/iris.json', function(data) {
   var dv = new DataSet.View().source(data);
   dv
     .transform({

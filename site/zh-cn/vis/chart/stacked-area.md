@@ -76,7 +76,7 @@ date（日期）| value （占比）| name (版本号)
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/android.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/android.json',function (data) {
     var dv = new DataSet.View().source(data);
     dv.transform({
       type: 'percent',

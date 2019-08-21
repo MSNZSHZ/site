@@ -14,7 +14,7 @@ tags: 数据处理,label样式
 subCat: 关系图
 -->
 <script>
-  $.getJSON('/assets/data/energy.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/energy.json', data => {
     // arc diagram layout
     const ds = new DataSet();
     const dv = ds.createView().source(data, {

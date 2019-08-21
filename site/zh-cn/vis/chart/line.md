@@ -83,7 +83,7 @@ time（时间）| requestCount（请求次数）|avgRt（响应时间）
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/system.json?nowrap',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/system.json?nowrap',function (data) {
   var Stat = G2.Stat;
   var chart = new G2.Chart({
     id: 'c2',
@@ -232,7 +232,7 @@ var data = [
 <div id="c5"></div>
 
 ```js-
-$.getJSON('/assets/data/monitor.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/monitor.json?nowrap', function(data) {
 
   var Stat = G2.Stat;
   var chart = new G2.Chart({
@@ -269,7 +269,7 @@ $.getJSON('/assets/data/monitor.json?nowrap', function(data) {
 <div id="c6"></div>
 
 ```js-
-$.getJSON('/assets/data/monitor.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/monitor.json?nowrap', function(data) {
   var chart = new G2.Chart({
     id: 'c6',
     forceFit: true,

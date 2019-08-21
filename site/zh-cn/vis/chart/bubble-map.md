@@ -66,7 +66,7 @@ Bubble Map 比[分级统计图](choropleth-map.html)更适用于比较带地理�
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/world.geo.json?nowrap', function(mapData) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json?nowrap', function(mapData) {
   var ds = new DataSet();
   var mapDv = ds.createView('map').source(mapData, {
     type: 'GeoJSON'
@@ -163,7 +163,7 @@ China|30.9
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/world.geo.json?nowrap', function(mapData) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json?nowrap', function(mapData) {
   var ds = new DataSet();
   var mapDv = ds.createView('map').source(mapData, {
     type: 'GeoJSON'
@@ -259,8 +259,8 @@ Arkansas|91.1
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/usa.geo.json?nowrap', function(mapData) {
-  $.getJSON('/assets/data/usa-forcible.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa.geo.json?nowrap', function(mapData) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa-forcible.json?nowrap', function(data) {
     var ds = new DataSet();
     var mapDv = ds.createView('map').source(mapData, {
       type: 'GeoJSON'
@@ -351,8 +351,8 @@ longitude(经度) |latitude（维度）|temperature
 </div>
 
 ```js-
-  $.getJSON('/assets/data/world.geo.json', function(mapData) {
-    $.getJSON('/assets/data/temp.json', function(data) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json', function(mapData) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/temp.json', function(data) {
       var ds = new DataSet();
       var mapDv = ds.createView('map').source(mapData, {
         type: 'GeoJSON',
@@ -429,8 +429,8 @@ longitude(经度) |latitude（维度）|temperature
 </div>
 
 ```js-
-  $.getJSON('/assets/data/world.geo.json', function(mapData) {
-    $.getJSON('/assets/data/temp.json', function(data) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json', function(mapData) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/temp.json', function(data) {
       var ds = new DataSet();
       var mapDv = ds.createView('map').source(mapData, {
         type: 'GeoJSON',

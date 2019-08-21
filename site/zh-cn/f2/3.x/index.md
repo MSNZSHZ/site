@@ -187,7 +187,7 @@ $('.chart-content .slick').each(function () {
 
 <!-- chart1 折线图 -->
 ```js-
-  $.getJSON('/assets/data/f2/series-line.json', function(data) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/f2/series-line.json', function(data) {
     var chart = new F2.Chart({
       id: 'c1',
       pixelRatio: window.devicePixelRatio

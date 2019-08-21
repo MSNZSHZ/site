@@ -14,7 +14,7 @@ tags: 数据处理
 subCat: 地图
 -->
 <script>
-    $.getJSON('/assets/data/usa.geo.json', mapData => {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa.geo.json', mapData => {
         var map = [];
         var features = mapData.features;
         // 获取出所有的地图区域名称
@@ -73,7 +73,7 @@ subCat: 地图
                 fillOpacity: 0.85
             });
 
-        $.getJSON('/assets/data/flights-airport.json', function (flights) {
+        $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/flights-airport.json', function (flights) {
              var countByAirport = {};
              var subFlights = [];
             // 计算飞机的起飞、降落数
@@ -83,7 +83,7 @@ subCat: 地图
                 countByAirport[origin] = (countByAirport[origin] || 0) + 1;
                 countByAirport[destination] = (countByAirport[destination] || 0) + 1;
             });
-            $.getJSON('/assets/data/airport.json', function (airports) {
+            $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/airport.json', function (airports) {
                 // Only consider airports with at least one flight.
                 var airportByIata = {};
                 airports = airports.filter(function (airport) {

@@ -31,7 +31,7 @@ subCat: 其他
         28615: "Government",
         35181: "Self-employed"
     };
-    $.getJSON('/assets/data/unemployment.json', data => {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/unemployment.json', data => {
         var dv = new DataSet.View().source(data);
         dv.transform({
             type: 'map',

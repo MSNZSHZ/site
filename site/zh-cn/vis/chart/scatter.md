@@ -77,7 +77,7 @@ variations:
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/scatter.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/scatter.json',function (data) {
   var dv = new DataSet.View().source(data);
   var hAvg = dv.mean('height'); // 计算体重的均值
   var wAvg = dv.mean('weight'); // 计算身高均值
@@ -109,7 +109,7 @@ $.getJSON('/assets/data/scatter.json',function (data) {
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/scatter.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/scatter.json',function (data) {
   var dv = new DataSet.View().source(data);
   var hAvg = dv.mean('height'); // 计算体重的均值
   var wAvg = dv.mean('weight'); // 计算身高均值
@@ -166,7 +166,7 @@ $.getJSON('/assets/data/scatter.json',function (data) {
 <div id="c4"></div>
 
 ```js-
-$.getJSON('/assets/data/scatter.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/scatter.json',function (data) {
   var dv = new DataSet.View().source(data);
   var hAvg = dv.mean('height'); // 计算体重的均值
   var wAvg = dv.mean('weight'); // 计算身高均值
@@ -235,7 +235,7 @@ $.getJSON('/assets/data/scatter.json',function (data) {
 <div id="c5"></div>
 
 ```js-
-$.getJSON('/assets/data/scatter.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/scatter.json',function (data) {
   var dv = new DataSet.View().source(data);
   var hAvg = dv.mean('height'); // 计算体重的均值
   var wAvg = dv.mean('weight'); // 计算身高均值
@@ -294,7 +294,7 @@ $.getJSON('/assets/data/scatter.json',function (data) {
 <div id="c6"></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json',function (data) {
   var chart = new G2.Chart({
     id: 'c6',
     forceFit: true,
@@ -309,7 +309,7 @@ $.getJSON('/assets/data/diamond.json',function (data) {
 <div id="c7"></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json',function (data) {
   var chart1 = new G2.Chart({
     id: 'c7',
     forceFit: true,
@@ -341,7 +341,7 @@ $.getJSON('/assets/data/diamond.json',function (data) {
 <div id="c8"></div>
 
 ```js-
-  $.getJSON('/assets/data/iris.json',function(data){
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/iris.json',function(data){
     var chart = new G2.Chart({
       id: 'c8',
       forceFit: true,

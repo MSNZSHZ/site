@@ -11,7 +11,7 @@ plotDescription: 详见：http://linkdata.org/
 -->
 <script>
   $("#mountNode").prepend('<img class="legend" width="150" src="https://gw.alipayobjects.com/zos/rmsportal/AuLKMNbRvKidugdUCaXz.png" style="position: absolute;right: 20px;"/>');
-  $.getJSON('/assets/data/2017-link-data.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/2017-link-data.json', data => {
     const { Util } = G6;
     const graph = new G6.Graph({
       container: 'mountNode',

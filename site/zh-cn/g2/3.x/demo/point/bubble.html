@@ -21,7 +21,7 @@ subCat: 散点图
     'Europe': Global.colors[2],
     'Oceania': Global.colors[3]
   };
-  $.getJSON('/assets/data/bubble.json', function(data){
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/bubble.json', function(data){
     const chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,

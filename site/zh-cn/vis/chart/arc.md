@@ -102,7 +102,7 @@ variations:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/miserables.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/miserables.json', function(data) {
   var dataMap = {};
   data.nodes.map(function(node,index) {
     node.id = index;
@@ -180,7 +180,7 @@ $.getJSON('/assets/data/miserables.json', function(data) {
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/relationship.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/relationship.json', function(data) {
   var dv = new DataSet.View().source(data, {
     type: 'graph',
     nodes: function (d) {

@@ -70,8 +70,8 @@ variations:
 
 
 ```js-
-  $.getJSON('/assets/data/usa.geo.json?nowrap', function(mapData) {
-    $.getJSON('/assets/data/airport.json?nowrap', function(data) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa.geo.json?nowrap', function(mapData) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/airport.json?nowrap', function(data) {
       var ds = new DataSet();
       var mapDv = ds.createView().source(mapData, {
         type: 'GeoJSON'

@@ -178,7 +178,7 @@ selfContainer: true
     });
 
     // 处理数据
-    $.getJSON('/assets/data/f2/fund/performance-three-year.json', function (json) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/f2/fund/performance-three-year.json', function (json) {
       const dates = [];
       json.forEach(obj => {
         dates.push(obj.reportDate);

@@ -14,7 +14,7 @@ subCat: 组件
 $('body').html('<select id="position-selector"><option value ="top-left">top-left</option><option value ="top-center">top-center</option><option value="top-right">top-right</option><option value ="bottom-left">bottom-left</option><option value ="bottom-center">bottom-center</option><option value="bottom-right">bottom-right</option> <option value="left-top">left-top</option><option value="left-center">left-center</option><option value="left-bottom">left-bottom</option><option value="right-top">right-top</option><option value="right-center">right-center</option><option value="right-bottom">right-bottom</option></select><div id="mountNode"></div>');
 $('#mountNode').css("margin-top","55px");
 $("#position-selector").css({'position':'absolute','top':'10px','left':'10px','width':'110px','height':'30px', 'z-index': 1000});
-$.getJSON('/assets/data/data-RgqdN.json', data => {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/data-RgqdN.json', data => {
     const ds = new DataSet();
     const dv = ds.createView().source(data);
     dv.transform({

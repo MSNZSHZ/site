@@ -17,7 +17,7 @@ plotDescription: 展示了浙江省，各个城市，本科和专科的数量及
 </style>
 <script>
   $("#mountNode").css('backgroundColor','#0F141F');
-  $.getJSON('/assets/data/university.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/university.json', data => {
     const Mapper = G6.Plugins['tool.d3.mapper'];
     const Util = G6.Util;
     const { forceSimulation, forceLink, forceManyBody, forceX, forceY } = d3;

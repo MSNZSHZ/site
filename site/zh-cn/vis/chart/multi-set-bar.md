@@ -122,7 +122,7 @@ chart.render();
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/population-by-age.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/population-by-age.json?nowrap', function(data) {
   var newData = data.slice(0,20);
   var dv = new DataSet.View().source(newData);
   dv.transform({

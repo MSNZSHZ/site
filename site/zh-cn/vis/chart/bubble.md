@@ -201,7 +201,7 @@ variations:
 <div id="c4"></div>
 
 ```js-
-$.getJSON('/assets/data/bubble-chart.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/bubble-chart.json', function(data) {
   var chart = new G2.Chart({
     container: 'c4',
     forceFit: true,
@@ -250,7 +250,7 @@ $.getJSON('/assets/data/bubble-chart.json', function(data) {
 <div id="c5" style="width:800px;margin:0 auto;"></div>
 
 ```js-
-$.getJSON('/assets/data/world.geo.json', function(mapData) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json', function(mapData) {
   var ds = new DataSet();
   var worldMapDv = ds.createView('world').source(mapData, {
     type: 'GeoJSON'
