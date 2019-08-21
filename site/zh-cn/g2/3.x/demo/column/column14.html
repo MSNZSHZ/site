@@ -51,7 +51,7 @@ subCat: 基础柱状图
 <script>
     const show_labels = ['办公用品', '家具产品', '技术产品', '容器，箱子', '剪刀，尺子，锯', '办公装饰品', '桌子', '电话通信产品', '电脑配件', '笔、美术用品', '橡皮筋', '标签', '纸张', '办公机器', '书架', '夹子及其配件 ', '家用电器', '信封', '椅子', '复印机、传真机'];
     let sortType = 'positive';
-    $.getJSON('/assets/data/company_sales.json', function (filedata) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/company_sales.json', function (filedata) {
         const rollupData = {};
         let tem_fileData = filedata;
         const data = combineData(tem_fileData);

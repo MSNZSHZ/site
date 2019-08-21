@@ -1,0 +1,32 @@
+<!--
+index: 4
+title: 点图层形状
+intro: 点映射成不同的形状
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*9wBfSonAsowAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [120.5969, 29.7918 ],
+  pitch: 0,
+  zoom: 7,
+  rotation:0
+});
+window.scene = scene;
+scene.on('loaded', () => {
+  
+  $.get('https://gw.alipayobjects.com/os/basement_prod/c6042c6b-45fd-4e2e-adf8-fdbf060441e8.json', data => {
+    scene.PointLayer({
+      zIndex: 2
+    })
+    .source(data)
+    .shape('w',[ 'circle', 'triangle', 'square', 'pentagon', 'hexagon', 'octogon', 'hexagram', 'rhombus', 'vesica' ])
+    .size(20) 
+    .active(true)
+    .color('w', ["#002466","#105CB3","#2894E0","#CFF6FF","#FFF5B8","#FFAB5C","#F27049","#730D1C"])
+     .render();
+  });
+});
+
+</script>

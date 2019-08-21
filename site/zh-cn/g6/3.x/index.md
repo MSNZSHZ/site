@@ -118,7 +118,7 @@ resource:
 
 
 ```js-
-$.getJSON('/assets/data/g6-index.json', data => {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g6-index.json', data => {
     const { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } = d3;
       const Template = G6.Plugins['template.maxSpanningForest'];
       const Mapper = G6.Plugins['tool.d3.mapper'];

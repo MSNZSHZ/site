@@ -1,0 +1,53 @@
+<!--
+index: 1
+title: 蜂窝热力图
+intro: 蜂窝布局
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*8EjURp3kkrcAAAAAAAAAAABkARQnAQ
+-->
+ <style>
+	#map { position:absolute; top:0; bottom:0; width:100%; }
+ </style>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 116.49434030056, 39.868073421167621, ],
+  pitch: 0,
+  zoom: 16
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/basement_prod/c3f8bda2-081b-449d-aa9f-9413b779205b.json', data => {
+    scene.HeatmapLayer({
+      zIndex: 2
+    })
+    .source(data,{
+      parser:{
+        type:'json',
+        x: 'lng',
+        y: 'lat'
+      },
+    transforms:[
+      {
+        type: 'hexagon',
+        size: 50,
+        field:'count',
+        method:'sum'
+      }
+    ]
+     },
+    )
+   .size('sum',(value)=>{
+       return value;
+    })
+    .shape('hexagon')
+    .style({
+      coverage: 0.8,
+      angle: 0,
+    })
+    .color('count', ["#002466","#105CB3","#2894E0","#CFF6FF","#FFF5B8","#FFAB5C","#F27049","#730D1C"])
+     .render();
+   
+  });
+});
+
+</script>

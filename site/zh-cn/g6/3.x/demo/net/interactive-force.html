@@ -101,7 +101,7 @@ plotDescription: 展示了小米科技有限责任公司的企业关系图谱
   });
   graph.on('node:mouseleave', clearAllStats);
   graph.on('canvas:click', clearAllStats);
-  $.getJSON('/assets/data/xiaomi.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/xiaomi.json', data => {
     graph.data({ nodes: data.nodes, edges: data.edges.map((edge, i) => {
         edge.id = 'edge' + i;
         return Object.assign({}, edge);

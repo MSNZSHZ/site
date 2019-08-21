@@ -1,0 +1,34 @@
+<!--
+index: 4
+title: 绘制虚线
+intro: 线类型绘制虚线
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*wfT1RavMSnUAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 102.602992, 23.107329],
+  pitch: 15,
+  zoom: 15.82,
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/rmsportal/ZVfOvhVCzwBkISNsuKCc.json', data => {
+    
+     scene.LineLayer({
+        zIndex: 2
+        })
+        .size(2)
+        .shape('line')
+        .source(data)
+        .color('rgb(102,235,255)')
+         .style({
+            lineType: 'dash',
+            dashArray: 200,
+            dashOffset: 0.2,
+            dashRatio: 0.5
+          })
+        .render();
+   });
+ });
+</script>

@@ -64,7 +64,7 @@ tags:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/mobile.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/mobile.json',function (data) {
   var tree = {
     name: 'root',
     children: data

@@ -274,7 +274,7 @@ variations:
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/g2.json',function(data){
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2.json',function(data){
   data.pop();
   data.reverse();
   var chart = new G2.Chart({
@@ -314,7 +314,7 @@ $.getJSON('/assets/data/g2.json',function(data){
 <div id="c3"></div>
 
 ```js-
-    $.getJSON('/assets/data/kagi.json', function(data) {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/kagi.json', function(data) {
       // 获取卡吉图数据点
       const kagiData = getKagiData(data, 'date', 'value');
       const chart = new G2.Chart({

@@ -146,7 +146,7 @@ variations:
 <div id='c2'></div>
 
 ```js-
- $.getJSON('/assets/data/stock-calendar.json', function(data) {
+ $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/stock-calendar.json', function(data) {
     const { DataView } = DataSet;
 
     // 获取当前月的第几周,从 0 开始

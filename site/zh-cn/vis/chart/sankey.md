@@ -69,7 +69,7 @@ tags:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/sankey.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/sankey.json', function(data) {
   var graph = {
     nodes: [],
     edges: data,

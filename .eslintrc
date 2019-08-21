@@ -17,6 +17,7 @@
     "GeoTIFF":true,
     "G2": true,
     "G6": true,
+    "G": true,
     "Hammer": true,
     "L7": true,
     "QRCode": true,

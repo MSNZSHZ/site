@@ -49,7 +49,7 @@ subCat: 组件
 </style>
 <script>
   const colors = ['#1f9399', '#dcb17f', '#875630', '#fd9833', '#254297', '#d872be', '#185c75', '#52c09c', '#766d58', '#28b8bd', '#f5d08e', '#b68761', '#f69574'];
-  $.getJSON('/assets/data/fertility.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/fertility.json', data => {
     const chart = new G2.Chart({
       container: 'mountNode',
       forceFit: true,

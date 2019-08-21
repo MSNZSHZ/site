@@ -108,7 +108,7 @@ window.getText = function getText(d) {
 ```
 
 ```js-
-$.getJSON('/assets/data/g2pv.json', data => {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2pv.json', data => {
   const chart = new G2.Chart({
     id: 'c1',
     forctFit: true,
@@ -163,7 +163,7 @@ const imageMask = new Image();
 imageMask.crossOrigin = '';
 imageMask.src = 'https://gw.alipayobjects.com/zos/rmsportal/mttlWMkaUOSlczceleJf.png';
 imageMask.onload = () => {
-  $.getJSON('/assets/data/g2pv.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2pv.json', data => {
     const chart = new G2.Chart({
       container: 'c2',
       forctFit: true,
@@ -210,7 +210,7 @@ imageMask.onload = () => {
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/g2pv.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2pv.json', function(data) {
   const chart = new G2.Chart({
     container: 'c3',
     forctFit: true,
@@ -252,7 +252,7 @@ $.getJSON('/assets/data/g2pv.json', function(data) {
 <div id="c4"></div>
 
 ```js-
-$.getJSON('/assets/data/g2pv.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2pv.json', function(data) {
   data.sort(function(a, b) {
     return b.pv - a.pv;
   });

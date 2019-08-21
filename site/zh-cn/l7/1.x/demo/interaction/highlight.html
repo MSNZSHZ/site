@@ -1,0 +1,38 @@
+<!--
+index: 1
+title: 滑过默认高亮
+intro: layer添加点击事件交互
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*nVwtQY3O9Q8AAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 121.4640, 31.2368 ],
+  pitch: 0,
+  zoom: 10
+});
+
+scene.on('loaded',()=>{
+
+$.getJSON('https://gw.alipayobjects.com/os/basement_prod/7bb614db-bac0-48d7-93e7-9446392d3917.json', city => {
+scene.PolygonLayer()
+    .source(city)
+    .color('unit_price',['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'].reverse())
+    .shape('fill')
+    .active(true)
+    .style({
+      opacity: 1
+    })
+    .render();
+   scene.PolygonLayer()
+    .source(city)
+    .color('#fff')
+    .shape('line')
+    .style({
+      opacity: 1
+    })
+    .render();
+});
+});
+</script>

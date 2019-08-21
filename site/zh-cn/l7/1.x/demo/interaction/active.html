@@ -1,0 +1,41 @@
+<!--
+index: 3
+title: 点击高亮
+intro: 监听layer点击事件设置高亮效果
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*npZsSptV_UUAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 114.0619, 22.5471 ],
+  pitch: 0,
+  zoom: 13
+});
+
+scene.on('loaded',()=>{
+
+$.getJSON('https://gw.alipayobjects.com/os/basement_prod/9a21b657-4887-4ad1-a657-ce1d6f3abbb5.json', city => {
+  const layer = scene.PolygonLayer()
+    .source(city)
+    .color('unit_price',['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'].reverse())
+    .shape('fill')
+    .active(false)
+    .style({
+      opacity: 1
+    })
+    .render();
+    scene.PolygonLayer()
+    .source(city)
+    .color('#fff')
+    .shape('line')
+    .style({
+      opacity: 1
+    })
+    .render();
+     layer.on('click',(feature)=>{
+      layer.setActive(feature.featureId,'red');
+    });
+});
+});
+</script>

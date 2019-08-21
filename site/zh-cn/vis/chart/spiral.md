@@ -60,7 +60,7 @@ tags:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/candle-sticks.json',function(data){
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/candle-sticks.json',function(data){
   var chart = new G2.Chart({
     container: 'c1',
     forceFit: true,
@@ -89,7 +89,7 @@ $.getJSON('/assets/data/candle-sticks.json',function(data){
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/g2.json',function(data){
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2.json',function(data){
   var chart = new G2.Chart({
     container: 'c2',
     forceFit: true,
@@ -125,7 +125,7 @@ $.getJSON('/assets/data/g2.json',function(data){
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/g2.json',function(data){
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/g2.json',function(data){
 	var Shape = G2.Shape;
 	function getRectPath(points) {
       const path = [];

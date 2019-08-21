@@ -48,7 +48,7 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552990403791-22d31a36
     simulation.alphaTarget(0);
     refreshPosition(e);
   });
-  $.getJSON('/assets/data/relations.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/relations.json', data => {
     graph.data({ nodes: data.nodes, edges: data.edges.map((edge, i) => {
         edge.id = 'edge' + i;
         return Object.assign({}, edge);

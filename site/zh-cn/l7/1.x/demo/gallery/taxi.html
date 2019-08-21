@@ -1,7 +1,8 @@
 <!--
-index: 1
+index: 5
 title: 点亮城市
-screenshot: https://gw.alipayobjects.com/zos/rmsportal/GPGNVfFPCpICaiHqiBNy.png
+intro: 城市建筑动画效果
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*Lts-SbiAr2gAAAAAAAAAAABkARQnAQ
 -->
 <script>
 const scene = new L7.Scene({
@@ -14,15 +15,6 @@ const scene = new L7.Scene({
   maxZoom: 18
 });
 scene.on('loaded', () => {
-  $.get('https://gw.alipayobjects.com/os/rmsportal/kNDVHmyUWAKhWmWXmjxM.json', data => {
-    scene.LineLayer({
-      zIndex: 2
-    })
-    .source(data)
-    .color('#F08D41')
-    .animate({enable:true})
-    .render();
-  });
    $.get('https://gw.alipayobjects.com/os/rmsportal/vmvAxgsEwbpoSWbSYvix.json', data => {
    scene.PolygonLayer({
       zIndex: 2

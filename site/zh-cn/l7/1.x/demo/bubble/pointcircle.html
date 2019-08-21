@@ -1,0 +1,61 @@
+<!--
+index: 1
+title: 点图层聚合
+intro: 海量点可以开启聚合模式
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*_PmeSYuBubYAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 12
+});
+window.scene = scene;
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/rmsportal/epnZEheZeDgsiSjSPcCv.json', data => {
+    const circleLayer = scene.PointLayer({
+      zIndex: 2
+    })
+    .source(data,{
+       isCluster:true
+    })
+    .shape('circle')
+    .size('point_count', [ 5, 40]) // default 1
+    .active(false)
+    .color('point_count',["#002466","#105CB3","#2894E0","#CFF6FF","#FFF5B8","#FFAB5C","#F27049","#730D1C"])
+    .style({
+      stroke: 'rgb(255,255,255)',
+      strokeWidth: 2,
+      opacity: 1.0
+    })
+     .render();
+
+     scene.PointLayer({
+      zIndex: 5
+    })
+     .source(circleLayer.layerSource)
+    .shape('point_count', 'text')
+    .active(true)
+    .size('point_count', [ 10, 20, 24 ])
+    .color('#fff')
+    .style({
+      // fontFamily: 'Monaco, monospace', // 字体
+      fontWeight: 200,
+      textAnchor: 'center', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
+      textOffset: [ 0, 0 ], // 文本相对锚点的偏移量 [水平, 垂直]
+      spacing: 2, // 字符间距
+      padding: [ 4, 4 ], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
+      strokeColor: 'white', // 描边颜色
+      strokeWidth: 2, // 描边宽度
+      opacity: 1.0
+    })
+    .render();
+     
+     
+  });
+    
+});
+
+</script>

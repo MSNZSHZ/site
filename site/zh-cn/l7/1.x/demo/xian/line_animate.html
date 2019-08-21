@@ -1,0 +1,49 @@
+<!--
+index: 5
+title: 线动画
+intro: 开启线动画效果
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*CX-FRLblN88AAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [105.2825, 34.9],
+  pitch: 15,
+  zoom:4,
+});
+scene.on('loaded', () => {
+    $.get('https://gw.alipayobjects.com/os/rmsportal/UEXQMifxtkQlYfChpPwT.txt', data => {
+    
+        scene.LineLayer({
+          zIndex: 2
+        })
+        .source(data, { 
+          parser:{
+              type: 'csv',
+              x: 'lng1',
+              y: 'lat1',
+              x1: 'lng2',
+              y1: 'lat2'
+          }
+          
+        })
+        .shape('greatCircle')
+        .size(0.8)
+        .color('rgb(13,64,140)') 
+        .animate({
+              enable:true,
+              interval:1,
+              duration:2,
+              trailLength:0.8
+           
+          })
+        .style({
+          opacity:0.6
+        })
+        .render();
+      });
+    
+   
+ });
+</script>

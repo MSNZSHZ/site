@@ -1,0 +1,46 @@
+<!--
+index: 1
+title: 点图层大小
+intro: 通过形状大小表达数据差异
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*xmMqTZG6NMoAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 3
+});
+scene.on('loaded', () => {
+
+$.get('https://gw.alipayobjects.com/os/basement_prod/67f47049-8787-45fc-acfe-e19924afe032.json', data => {
+    scene.PointLayer({
+      zIndex: 2
+    })
+    .source(data,{
+      parser:{
+      type:'json',
+      x:'x',
+      y:'y',
+    }})
+    .shape('circle')
+    .size('v', [1,25])
+    .active(true)
+    .filter('g',(g)=>{
+      return g === "2";
+    })
+    .color('#fd8d3c') // 线性映射
+    .style({
+      stroke: 'rgb(255,255,255)',
+      strokeWidth: 1,
+      opacity: 1.
+    })
+     .render();
+     
+
+  });
+
+    
+});
+</script>

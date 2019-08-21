@@ -1,0 +1,53 @@
+<!--
+index: 1
+title: 自定义高亮效果
+intro: 通过添加新图层设置高亮效果。
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*Y8uFSaVOTJEAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 118.7368, 32.0560 ],
+  pitch: 0,
+  zoom: 10
+});
+
+scene.on('loaded',()=>{
+
+$.getJSON('https://gw.alipayobjects.com/os/basement_prod/91247d10-585b-4406-b1e2-93b001e3a0e4.json', city => {
+  const layer = scene.PolygonLayer()
+    .source(city)
+    .color('unit_price',['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'].reverse())
+    .shape('fill')
+    .active(false)
+    .style({
+      opacity: 1
+    })
+    .render();
+
+   scene.PolygonLayer()
+    .source(city)
+    .color('#fff')
+    .shape('line')
+    .style({
+      opacity: 1
+    })
+    .render();
+    const highlight = scene.LineLayer()
+    .source(city)
+    .color('red')
+    .filter(false)
+    .shape('line')
+    .size(2)
+    .render();
+   
+     layer.on('click',(item)=>{
+      const { feature } = item;
+      highlight.filter('id',(id)=>{
+        return feature.properties.id === id;
+      }).render();
+    });
+});
+});
+</script>

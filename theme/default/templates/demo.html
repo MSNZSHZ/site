@@ -126,6 +126,9 @@
                                 </h4>
                             </div>
                             {% endif %}
+                             {% if currentDemo.intro %}
+                                 <p style ="padding-left: 40px; margin-bottom: -10px;">{{currentDemo.intro}}</p>
+                            {% endif %}
                             {% if template != 'f2-demo' %}
                             <div id="preview" {% if template === 'g2-demo' %} style="padding: 0" class="demo g2" {% else %} class="demo" {% endif %}></div>
                             {% else %}

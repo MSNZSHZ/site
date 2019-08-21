@@ -54,7 +54,7 @@ variations:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/relationship-with-weight.json', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/relationship-with-weight.json', function(data) {
   var dv = new DataSet.View().source(data, {
     type: 'graph',
     edges: function(d) {

@@ -1,0 +1,32 @@
+<!--
+index: 2
+title: 线颜色映射
+intro: 数据驱动不同颜色显示线
+screenshot: https://gw.alipayobjects.com/zos/rmsportal/aiOkgeJDQsAYkcFjAayM.png
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 102.602992, 23.107329],
+  pitch: 15,
+  zoom: 13.82,
+});
+scene.on('loaded', () => {
+  $.get('https://gw.alipayobjects.com/os/rmsportal/ZVfOvhVCzwBkISNsuKCc.json', data => {
+    scene.LineLayer({
+      zIndex: 2
+    })
+    .source(data)
+    .size(1)
+    .active(true)
+    .shape('line')      
+    .color('ELEV',["#E8FCFF", "#CFF6FF", "#A1E9ff", "#65CEF7", "#3CB1F0", "#2894E0", "#1772c2", "#105CB3", "#0D408C", "#002466"].reverse())
+    .render();
+    
+  });
+
+});
+
+
+</script>

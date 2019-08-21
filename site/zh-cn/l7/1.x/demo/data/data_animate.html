@@ -1,0 +1,58 @@
+<!--
+index: 1
+title: 点运动
+intro: 通过Source setData 方法更新数据控制点运动
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*jKUeTIUijKcAAAAAAAAAAABkARQnAQ
+-->
+<script>
+var radius = 0.1;
+function pointOnCircle(angle) {
+return {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         120.19382669582967 + Math.cos(angle) * radius,
+          30.258134 + Math.sin(angle) * radius
+        ]
+      }
+    }
+  ]
+ };
+}
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 11
+});
+
+scene.on('loaded', () => {
+    const circleLayer = scene.PointLayer({
+      zIndex: 0,
+    })
+    .source(pointOnCircle(0))
+    .shape('circle')
+    .size(15) // default 1
+    .active(true)
+    .color('#2F54EB')
+    .style({
+      stroke: 'rgb(255,255,255)',
+      strokeWidth: 2,
+      opacity: 1
+    })
+     .render();
+
+  function animateMarker(timestamp) {
+   
+      circleLayer.setData(pointOnCircle(timestamp / 1000));
+      requestAnimationFrame(animateMarker);
+  }
+   animateMarker(0);
+});
+</script>

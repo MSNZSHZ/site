@@ -1,0 +1,27 @@
+<!--
+index: 1
+title: 添加地图组件
+intro: Marker, Zoom, Scale
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*tETKT4vAwpEAAAAAAAAAAABkARQnAQ
+-->
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [104.838088,34.075889],
+  pitch: 0,
+  zoom: 6,
+  zoomControl:false,
+  scaleControl:false
+});
+scene.on('loaded',()=>{
+  new L7.Control.Scale({position:'bottomleft'}).addTo(scene);
+  new L7.Control.Zoom({position:'topleft'}).addTo(scene);
+  const popup = new L7.Popup({anchor:'left'}).setText('hello world');
+  new L7.Marker({color:'blue'})
+    .setLnglat([104.838088,34.075889 ])
+    .setPopup(popup)
+    .addTo(scene);
+});
+
+</script>

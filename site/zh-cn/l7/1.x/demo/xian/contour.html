@@ -1,0 +1,31 @@
+<!--
+index: 3
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*2WcCS4biU-kAAAAAAAAAAABkARQnAQ
+title: 线宽度映射
+intro: 等温线可视化
+-->
+
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 102.602992, 39.107329],
+  pitch: 15,
+  zoom: 4,
+});
+scene.on('loaded', () => {
+    $.get('https://gw.alipayobjects.com/os/basement_prod/9f6afbcd-3aec-4a26-bd4a-2276d3439e0d.json', data => {
+    scene.LineLayer({
+      zIndex: 2
+    })
+    .source(data)
+    .shape('line')
+    .size('value', [1, 4])
+    .color('value',['#ca0020','#f4a582','#f7f7f7','#92c5de','#0571b0'].reverse())
+    .render();
+  });
+
+});
+
+
+</script>

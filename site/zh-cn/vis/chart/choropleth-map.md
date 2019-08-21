@@ -67,8 +67,8 @@ Florida|19893297|FL
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/usa.geo.json?nowrap', function(mapData) {
-  $.getJSON('/assets/data/2014-usa-population.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa.geo.json?nowrap', function(mapData) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/2014-usa-population.json?nowrap', function(data) {
     var ds = new DataSet();
     var mapDv = ds.createView('map').source(mapData, {
       type: 'GeoJSON'
@@ -167,7 +167,7 @@ $.getJSON('/assets/data/usa.geo.json?nowrap', function(mapData) {
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/world.geo.json', function(mapData) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/world.geo.json', function(mapData) {
   const chart = new G2.Chart({
     container: 'c2',
     forceFit: true,
@@ -283,8 +283,8 @@ Arkansas|6|422310|638017
 <div id="c3"></div>
 
 ```js-
-$.getJSON('/assets/data/usa.geo.json?nowrap', function(mapData) {
-  $.getJSON('/assets/data/2008-usa-president.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/usa.geo.json?nowrap', function(mapData) {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/2008-usa-president.json?nowrap', function(data) {
     G2.Global.shape.polygon = {
       'stroke-width': 0
     }

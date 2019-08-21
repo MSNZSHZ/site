@@ -10,7 +10,7 @@ tags: legend位置
 subCat: 组件
 -->
 <script>
-  $.getJSON('/assets/data/fertility2.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/fertility2.json', data => {
    const dv = new DataSet.View().source(data).transform({
      type: 'aggregate',
      fields: [ 'value', 'value' ],

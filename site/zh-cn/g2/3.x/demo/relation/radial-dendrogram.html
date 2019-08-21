@@ -14,7 +14,7 @@ tags: 数据处理,label位置
 subCat: 关系图
 -->
 <script>
-    $.getJSON('/assets/data/flare.json', data => {
+    $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/flare.json', data => {
         const dv = new DataSet.View().source(data, {
             type: 'hierarchy'
         });

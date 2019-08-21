@@ -1,0 +1,73 @@
+<!--
+index: 2
+title: 添加图表
+intro: 利用G2绘制统计图表在地图上显示
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*Ti9XQrrlveIAAAAAAAAAAABkARQnAQ
+-->
+
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'light', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 3
+});
+scene.on('loaded',()=>{
+  $.getJSON('https://gw.alipayobjects.com/os/basement_prod/0b96cca4-7e83-449a-93d0-2a77053e74ab.json', function(data) {
+        data.nodes.forEach(item=>{
+            const el = document.createElement('div');
+            const total = item.gdp.Agriculture + item.gdp.Industry + item.gdp.Service;
+            
+            const size =Math.max(Math.min(parseInt(total / 20000), 150),30);
+            var data = [{
+            item: 'Agriculture',
+            count: item.gdp.Agriculture,
+            percent: item.gdp.Agriculture / total
+          }, {
+            item: 'Industry',
+            count: item.gdp.Industry,
+            percent: item.gdp.Industry / total 
+          }, {
+            item: 'Service',
+            count: item.gdp.Service,
+            percent: item.gdp.Service / total
+          }];
+          var chart = new G2.Chart({
+            container: el,
+            width:size,
+            height:size,
+            render:'svg',
+            padding:5,
+          });
+          chart.source(data, {
+            percent: {
+              formatter: function formatter(val) {
+                val = val.toFixed(4) * 100 + '%';
+                return val;
+              }
+            }
+          });
+          chart.coord('theta', {
+            radius: 1.0
+          });
+          chart.legend(false);
+          chart.tooltip({showTitle: false});
+          chart.intervalStack().position('percent').color('item',['#fc8d59','#ffffbf','#91cf60']).style({
+            lineWidth: 1,
+            stroke: '#fff'
+          });
+          chart.render();
+            const popup = new L7.Popup({anchor:'left'}).setText(item.name);
+            new L7.Marker({ element:el})
+            .setLnglat( item.coordinates)
+            .setPopup(popup)
+            .addTo(scene);
+
+
+        });
+       
+    });
+});
+</script>

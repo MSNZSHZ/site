@@ -121,7 +121,7 @@ variations:
 <div style="clear: both;"></div>
 
 ```js-
-$.getJSON('/assets/data/iris.json?nowrap',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/iris.json?nowrap',function (data) {
   var fields = [ 'SepalLength','SepalWidth','PetalLength','PetalWidth' ];
   fields.forEach(function(field, i) {
     var dv = new DataSet.View().source(data);
@@ -161,7 +161,7 @@ $.getJSON('/assets/data/iris.json?nowrap',function (data) {
 <div id="c2"></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json?nowrap',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json?nowrap',function (data) {
   data = data.slice(1300,1400);
   var dv = new DataSet.View().source(data);
   dv.transform({
@@ -195,7 +195,7 @@ $.getJSON('/assets/data/diamond.json?nowrap',function (data) {
 <div id="c3-2"></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json?nowrap',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json?nowrap',function (data) {
   data = data.slice(1300,1400);
   var dv = new DataSet.View().source(data);
   dv.transform({

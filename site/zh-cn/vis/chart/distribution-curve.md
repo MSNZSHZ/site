@@ -17,7 +17,7 @@ tags:
 <div id="c1"></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json?nowrap', function(data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json?nowrap', function(data) {
     var allData = [];
     const chart = new G2.Chart({
         container: 'c1',

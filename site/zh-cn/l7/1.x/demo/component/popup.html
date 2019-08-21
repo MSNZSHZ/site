@@ -1,0 +1,62 @@
+<!--
+index: 1
+title: 图层添加popup
+intro: 图层添加popup用于显示地图上要素的信息
+screenshot: https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*8yt5QY-Z8igAAAAAAAAAAABkARQnAQ
+-->
+<style>
+ p {
+     margin: 0;
+    padding: 0;
+  }
+</style>
+<script>
+const scene = new L7.Scene({
+  id: 'map',
+  mapStyle: 'dark', // 样式URL
+  center: [ 120.19382669582967, 30.258134 ],
+  pitch: 0,
+  zoom: 5,
+  zoomControl:false,
+  scaleControl:true,
+  attributionControl:true
+});
+
+scene.on('loaded', () => {
+$.get('https://gw.alipayobjects.com/os/rmsportal/oVTMqfzuuRFKiDwhPSFL.json', function(data) {
+     const layer = scene.PointLayer({
+        zIndex: 2
+      }).source(data.list, {
+        parser: {
+          type: 'json',
+          x: 'j',
+          y: 'w'
+        }
+      }).shape('hexagon')
+      .size('t', [0, 10])
+      .active(true)
+      .color('t', ["#002466", "#105CB3", "#2894E0", "#CFF6FF", "#FFF5B8", "#FFAB5C", "#F27049", "#730D1C"])
+      .render();
+     layer.fitBounds();
+     layer.on('click',(e)=>{
+        const { lnglat, feature } = e;
+        const html =`<p>省份：${feature.s}</p>
+        <p>地区：${feature.m}</p>
+        <p>温度：${feature.t}</p>
+        `;
+      
+        new L7.Popup()
+          .setLnglat([lnglat.lng, lnglat.lat])
+          .setHTML(html).addTo(scene);
+     });
+   
+    });
+   
+  
+
+
+ 
+});
+
+
+</script>

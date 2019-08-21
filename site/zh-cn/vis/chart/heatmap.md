@@ -109,7 +109,7 @@ tags:
 <div id='c1'></div>
 
 ```js-
-$.getJSON('/assets/data/diamond.json',function (data) {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/diamond.json',function (data) {
     var chart = new G2.Chart({
       container: 'c1',
       forceFit: true,

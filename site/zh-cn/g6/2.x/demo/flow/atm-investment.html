@@ -9,7 +9,7 @@ resource:
 screenshot: https://gw.alipayobjects.com/zos/rmsportal/iqocwOEymnsXllbbUqrG.png
 -->
 <script>
-$.getJSON('/assets/data/atm-investment.json', table => {
+$.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/atm-investment.json', table => {
   const sankeyPlugin = new G6.Plugins['template.tableSankey']({
         table,
         onBeforeSankeyProcessorExecute(sankeyProcessor) {
