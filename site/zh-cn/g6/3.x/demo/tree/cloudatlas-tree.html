@@ -948,7 +948,7 @@ resource:
       }
     })
   });
-  $.getJSON('/assets/data/g6-sourcedata.json', data => {
+  $.getJSON('https://gw.alipayobjects.com/os/basement_prod/dd089904-664c-4699-9593-e0df409558c0.json', data => {
     data = formatData(data);
     graph.data(data);
     graph.render();
