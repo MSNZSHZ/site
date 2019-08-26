@@ -37,35 +37,39 @@ resource:
           stroke: '#A3B1BF'
         }
       },
-      layout: function(data) {
-        return Hierarchy.mindmap(data, {
-          direction: 'H',
-          getHeight() { return 16; },
-          getWidth() { return 16; },
-          getVGap() { return 10; },
-          getHGap() { return 100; }
-        });
+      layout: {
+        type: 'mindmap',
+        direction: 'H',
+        getHeight() { return 16; },
+        getWidth() { return 16; },
+        getVGap() { return 10; },
+        getHGap() { return 100; }
       }
     });
+
+    let centerX = 0;
+    graph.node(function(node) {
+      if(node.id === 'Modeling Methods') {
+        centerX = node.x;
+      }
+
+      return {
+        size: 26,
+        style: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        },
+        label: node.id,
+        labelCfg: {
+          position: node.children && node.children.length > 0 ? 'left' 
+          :
+          node.x > centerX ? 'right' : 'left' 
+        }
+      };
+    });
+
     graph.data(data);
     graph.render();
-    const root = graph.find('node', node => { return node.get('model').data.id === 'Modeling Methods' });
-    const x = root.get('model').x;
-    graph.getNodes().forEach(node => {
-      const model = node.get('model');
-      model.label = model.data.id;
-      model.labelCfg = { offset: 10, style: { fill: '#666' } };
-      if (model.children && model.children.length > 0) {
-        model.labelCfg.position = 'left';
-      } else {
-        if (model.x > x) {
-          model.labelCfg.position = 'right';
-        } else {
-          model.labelCfg.position = 'left';
-        }
-      }
-    });
-    graph.refresh();
     graph.fitView();
   });
 </script>

@@ -1,0 +1,145 @@
+<!--
+index: 1
+title: 树图-边上显示label
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*4254RqRQhBYAAAAAAAAAAABkARQnAQ
+resource:
+  jsFiles:
+    - ${url.hierarchy}
+-->
+<script>
+  const data = {
+    isRoot: true,
+    id: 'Root',
+    style: {
+      fill: 'red'
+    },
+    children: [
+      {
+        id: 'SubTreeNode1',
+        raw: {},
+        children: [
+          {
+            id: 'SubTreeNode1.1'
+          },
+          {
+            id: 'SubTreeNode1.2',
+            children: [
+              {
+                id: 'SubTreeNode1.2.1'
+              },
+              {
+                id: 'SubTreeNode1.2.2'
+              },
+              {
+                id: 'SubTreeNode1.2.3'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'SubTreeNode2',
+        children: [
+          {
+            id: 'SubTreeNode2.1'
+          }
+        ]
+      }, {
+        id: 'SubTreeNode3',
+        children: [
+          {
+            id: 'SubTreeNode3.1'
+          },
+          {
+            id: 'SubTreeNode3.2'
+          },
+          {
+            id: 'SubTreeNode3.3'
+          }
+        ]
+      }, {
+        id: 'SubTreeNode4'
+      }, {
+        id: 'SubTreeNode5'
+      }, {
+        id: 'SubTreeNode6'
+      }, {
+        id: 'SubTreeNode7',
+      }, {
+        id: 'SubTreeNode8'
+      }, {
+        id: 'SubTreeNode9'
+      }, {
+        id: 'SubTreeNode10'
+      }, {
+        id: 'SubTreeNode11'
+      }
+    ]
+  };
+  const graph = new G6.TreeGraph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    pixelRatio: 2,
+    linkCenter: true,
+    modes: {
+      default: [{
+        type: 'collapse-expand',
+        onChange(item, collapsed) {
+          const data = item.get('model').data;
+          data.collapsed = collapsed;
+          return true;
+        }
+      }, 'drag-canvas', 'zoom-canvas']
+    },
+    defaultNode: { size: 30},
+    nodeStyle: {
+      default: {
+        fill: '#40a9ff',
+        stroke: '#096dd9'
+      }
+    },
+    edgeStyle: {
+      default: {
+        stroke: '#A3B1BF'
+      }
+    },
+    layout: {
+      type: 'compactBox',
+      direction: 'LR',
+      getId(d) { return d.id; },
+      getHeight() { return 16 },
+      getWidth() { return 16 },
+      getVGap() { return 50 },
+      getHGap() { return 100 }
+    }
+  });
+
+  graph.node(node => {
+    return {
+      size: 16,
+      anchorPoints: [[0,0.5], [1,0.5]],
+      style: {
+        fill: '#40a9ff',
+        stroke: '#096dd9'
+      },
+      label: node.id,
+      labelCfg: {
+        position: node.children && node.children.length > 0 ? 'left' : 'right'
+      }
+    }
+  });
+  let i = 0;
+  graph.edge(() => {
+    i++;
+    return {
+      shape: 'cubic-horizontal',
+      color: '#A3B1BF',
+      label: i
+    }
+  });
+  
+  graph.data(data);
+  graph.render();
+  graph.fitView();
+</script>

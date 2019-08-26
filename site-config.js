@@ -6,7 +6,7 @@ var pkg = require('./package.json');
 const g6Url = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-';
 const g6EditorUrl = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-editor-';
 const g6OldVersion = '2.2.6';
-const g6Version = '3.0.2';
+const g6Version = '3.0.5-beta.7';
 const g6EditorVersion = '1.2.0';
 module.exports = {
     url: {
@@ -38,7 +38,7 @@ module.exports = {
         lodash:   'https://gw.alipayobjects.com/os/antv/assets/lib/lodash-4.17.4.min.js',
         react: 'https://gw.alipayobjects.com/os/antv/assets/lib/react-16.4.0/react.production.min.js',
         'react-dom': 'https://gw.alipayobjects.com/os/antv/assets/lib/react-16.4.0/react-dom.production.min.js',
-        hierarchy:   'https://gw.alipayobjects.com/os/antv/pkg/_antv.hierarchy-0.4.0/build/hierarchy.js'
+        hierarchy:   'https://gw.alipayobjects.com/os/antv/pkg/_antv.hierarchy-0.5.0/build/hierarchy.js'
     },
     assets: '/assets',
     base: '/',
@@ -64,8 +64,8 @@ module.exports = {
             template: 'f2-demo-standalone'
         },
         {
-            src: 'zh-cn/g6/1.x/demo',
-            dest: '${assets}/dist/${pkg.version}/g6/1.x',
+            src: 'zh-cn/g6/3.x/demo',
+            dest: '${assets}/dist/${pkg.version}/g6/3.x',
             template: 'g6-demo-standalone'
         },
     ],

@@ -33,7 +33,7 @@ resource:
       const rect = group.addShape('rect', {
         attrs: { fill: '#fff', stroke: '#666' }
       });
-      const content = cfg.data.name.replace(/(.{19})/g,'$1\n');
+      const content = cfg.name.replace(/(.{19})/g,'$1\n');
       const text = group.addShape('text', {
         attrs: {
           text: content,
@@ -45,7 +45,7 @@ resource:
         }
       });
       const bbox = text.getBBox();
-      const hasChildren = cfg.data.children && cfg.data.children.length > 0;
+      const hasChildren = cfg.children && cfg.children.length > 0;
       if (hasChildren) {
         group.addShape('marker', {
           attrs: {
@@ -67,6 +67,7 @@ resource:
       return rect;
     }
   }, 'single-shape');
+
   const graph = new G6.TreeGraph({
     container: 'mountNode',
     width: window.innerWidth,
@@ -75,7 +76,7 @@ resource:
       default: [{
         type: 'collapse-expand',
         onChange(item, collapsed) {
-          const data = item.get('model').data;
+          const data = item.get('model');
           const icon = item.get('group').findByClassName('collapse-icon');
           if (collapsed) {
             icon.attr('symbol', EXPAND_ICON);
@@ -99,15 +100,14 @@ resource:
         stroke: '#A3B1BF'
       }
     },
-    layout: data => {
-      return Hierarchy.compactBox(data, {
-        direction: 'LR',
-        getId(d) { return d.id; },
-        getHeight() { return 16; },
-        getWidth() { return 16; },
-        getVGap() { return 20; },
-        getHGap() { return 80; }
-      });
+    layout: {
+      type: 'compactBox',
+      direction: 'LR',
+      getId(d) { return d.id; },
+      getHeight() { return 16; },
+      getWidth() { return 16; },
+      getVGap() { return 20; },
+      getHGap() { return 80; }
     }
   });
   $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/modeling-methods.json', data => {

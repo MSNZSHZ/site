@@ -18,7 +18,7 @@ const data = {
             }
         },
         g6: {
-            version: '1.0.0',
+            version: '3.0.0',
             name: 'G6',
             href: '${base}zh-cn/g6/3.x/index.html',
             icon: '${assets}/image/icon/g6.svg',
