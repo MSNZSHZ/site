@@ -1,7 +1,7 @@
 <!--
 index: 1
 title: 环形树
-screenshot: https://cdn.nlark.com/yuque/0/2019/png/174835/1552989420680-37e51b07-553e-403d-ac1d-3fa1ca8b3932.png
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*H3kaRoJZZE4AAAAAAAAAAABkARQnAQ
 resource:
   jsFiles:
     - ${url.jquery}
@@ -47,6 +47,18 @@ resource:
         return result;
       }
     });
+
+    graph.node(function(node) {
+      return {
+        size: 26,
+        style: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        },
+        label: node.id
+      };
+    });
+
     graph.data(data);
     graph.render();
     graph.fitView();

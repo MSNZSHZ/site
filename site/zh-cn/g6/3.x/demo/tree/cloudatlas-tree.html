@@ -283,7 +283,7 @@ resource:
         const config = getNodeConfig(cfg);
         const isRoot = cfg.type === "root";
         const nodeError = cfg.nodeError;
-        const { data = {} } = cfg;
+        const data = cfg;
 
         const container = nodeBasicMethod.createNodeBox(
           group,
@@ -296,7 +296,7 @@ resource:
         /* name */
         const nameText = group.addShape("text", {
           attrs: {
-            text: cfg.name,
+            text: fittingString(cfg.name, 133, 12),
             x: 19,
             y: 19,
             fontSize: 14,
@@ -307,9 +307,6 @@ resource:
             cursor: "pointer"
           }
         });
-
-        /* 修复 nameText 超长 */
-        fittingString(nameText, data.name, 133);
 
         if (nodeError) {
           group.addShape("image", {
@@ -342,7 +339,7 @@ resource:
       drawShape: (cfg, group) => {
         const config = getNodeConfig(cfg);
         const isRoot = cfg.type === "root";
-        const { data = {} } = cfg;
+        const data = cfg;
         const nodeError = data.nodeError;
         /* 最外面的大矩形 */
         const container = nodeBasicMethod.createNodeBox(
@@ -484,7 +481,8 @@ resource:
         /* name */
         const nameText = group.addShape("text", {
           attrs: {
-            text: data.name,
+            /* 根据 IP 的长度计算出 剩下的 留给 name 的长度！ */
+            text: fittingString(data.name, 224 - ipWidth - 20, 12),//data.name,
             x: 19,
             y: 19,
             fontSize: 14,
@@ -497,14 +495,10 @@ resource:
           // tooltip: cfg.name,
         });
 
-        /* 根据 IP 的长度计算出 剩下的 留给 name 的长度！ */
-        /* 修复 nameText 超长 */
-        fittingString(nameText, data.name, 224 - ipWidth - 20);
-
         /* 下面的文字 */
         const remarkText = group.addShape("text", {
           attrs: {
-            text: data.keyInfo,
+            text: fittingString(data.keyInfo, 204, 12),
             x: 19,
             y: 45,
             fontSize: 14,
@@ -516,7 +510,6 @@ resource:
           // className: 'keyInfo',
           // tooltip: cfg.keyInfo,
         });
-        fittingString(remarkText, data.keyInfo, 204);
 
         if (nodeError) {
           group.addShape("image", {
@@ -601,7 +594,7 @@ resource:
         });
         const text = group.addShape("text", {
           attrs: {
-            text: "Sofarouter",
+            text: "edge-label",
             x: 0,
             y: 0,
             fontSize: 12,
@@ -764,7 +757,12 @@ resource:
         },
         "double-finger-drag-canvas",
         "three-finger-drag-canvas",
-        "tooltip",
+        { 
+          type: "tooltip",
+          formatText: (data) => {
+            return `<div>${data.name}</div>`
+          }
+        },
         {
           type: "drag-canvas",
           shouldUpdate: function shouldUpdate() {
@@ -822,14 +820,17 @@ resource:
     }
     return len;
   }
-  function fittingString (c, str, maxWidth) {
-    const width = strLen(str) * 8;
-    const ellipsis = "…";
+  function fittingString (str, maxWidth, fontSize) {
+    const fontWidth = fontSize * 1.3 //字号+边距
+    maxWidth = maxWidth * 2 // 需要根据自己项目调整
+    const width = strLen(str) * fontWidth
+    const ellipsis = '…'
     if (width > maxWidth) {
-      const actualLen = Math.floor((maxWidth - 10) / 8);
-      c.attr('text', str.substring(0, actualLen) + ellipsis);
-      c._cfg.tooltip = str;
+      const actualLen = Math.floor((maxWidth - 10) / fontWidth);
+      const result = str.substring(0, actualLen) + ellipsis
+      return result
     }
+    return str
   };
   function translate(x, y) {
     // graph.translate(-x, -y);

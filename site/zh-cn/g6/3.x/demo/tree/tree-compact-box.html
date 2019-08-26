@@ -37,30 +37,33 @@ resource:
           stroke: '#A3B1BF'
         }
       },
-      layout: function(data) {
-        return Hierarchy.compactBox(data, {
-          direction: 'LR',
-          getId(d) { return d.id; },
-          getHeight() { return 16 },
-          getWidth() { return 16 },
-          getVGap() { return 10 },
-          getHGap() { return 100 }
-        });
+      layout: {
+        type: 'compactBox',
+        direction: 'LR',
+        getId(d) { return d.id; },
+        getHeight() { return 16 },
+        getWidth() { return 16 },
+        getVGap() { return 10 },
+        getHGap() { return 100 }
       }
     });
+
+    graph.node(function(node) {
+      return {
+        size: 26,
+        style: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        },
+        label: node.id,
+        labelCfg: {
+          position: node.children && node.children.length > 0 ? 'left' : 'right'
+        }
+      };
+    });
+    
     graph.data(data);
     graph.render();
-    graph.getNodes().forEach(node => {
-      const model = node.get('model');
-      model.label = model.data.id;
-      model.labelCfg = { offset: 10, style: { fill: '#666' } };
-      if (model.children && model.children.length > 0) {
-        model.labelCfg.position = 'left';
-      } else {
-        model.labelCfg.position = 'right';
-      }
-    });
-    graph.refresh();
     graph.fitView();
   });
   </script>

@@ -37,27 +37,30 @@ resource:
           stroke: '#A3B1BF'
         }
       },
-      layout: function(data) {
-        return Hierarchy.dendrogram(data, {
-          direction: 'LR', // H / V / LR / RL / TB / BT
-          nodeSep: 20,
-          rankSep: 100
-        });
+      layout: {
+        type: 'dendrogram',
+        direction: 'LR', // H / V / LR / RL / TB / BT
+        nodeSep: 30,
+        rankSep: 100
       }
     });
+
+    graph.node(function(node) {
+      return {
+        size: 26,
+        style: {
+          fill: '#40a9ff',
+          stroke: '#096dd9'
+        },
+        label: node.id,
+        labelCfg: {
+          position: node.children && node.children.length > 0 ? 'left' : 'right'
+        }
+      };
+    });
+
     graph.data(data);
     graph.render();
-    graph.getNodes().forEach(node => {
-      const model = node.get('model');
-      model.label = model.data.id;
-      model.labelCfg = { offset: 10, style: { fill: '#666' } };
-      if (model.children && model.children.length > 0) {
-        model.labelCfg.position = 'left';
-      } else {
-        model.labelCfg.position = 'right';
-      }
-    });
-    graph.refresh();
     graph.fitView();
   });
 </script>
