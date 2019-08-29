@@ -1,0 +1,80 @@
+<!--
+index: 5
+title: 自定义折线2
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*UKy4Tai73PYAAAAAAAAAAABkARQnAQ
+resource:
+  jsFiles:
+-->
+<script>
+    /**
+     * 该案例演示如何通过复写复写draw方法自定义折线。
+     * by siogo 提供的 issue（https://github.com/antvis/g6/issues/814）
+     * 
+     * 如果要适应所有拖动情况，则需要根据拖动的位置来动态改变锚点
+    */
+    G6.registerEdge('line-arrow', {
+      draw(cfg, group) {
+        const { startPoint, endPoint } = cfg
+        const keyShape = group.addShape('path', {
+          attrs: {
+              path: [
+                  ['M', startPoint.x, startPoint.y],
+                  ['L', endPoint.x / 3 + 2 / 3 * startPoint.x , startPoint.y],
+                  ['L', endPoint.x / 3 + 2 / 3 * startPoint.x , endPoint.y],
+                  ['L', endPoint.x, endPoint.y]
+              ],
+              stroke: '#BBB',
+              lineWidth: 1,
+              startArrow: {
+                  path: 'M 6,0 L -6,-6 L -3,0 L -6,6 Z',
+                  d: 6
+              },
+              endArrow: {
+                  path: 'M 6,0 L -6,-6 L -3,0 L -6,6 Z',
+                  d: 6
+              },
+              className: 'edge-shape'
+          }
+        });
+        return keyShape
+      }
+    });
+
+    G6.registerNode('circleNode', {
+      drawShape(cfg, group) {
+        const keyShape = group.addShape('circle', {
+          attrs: {
+            x: 0,
+            y: 0,
+            r: 30,
+            fill: '#87e8de'
+          }
+        });
+
+        return keyShape;
+      }
+    }, 'circle');
+
+    const data = {
+        nodes: [
+            {id: '7', x: 100, y: 50, size: 40, shape: 'circleNode',anchorPoints: [[1, 0.5], [1, 0]]},
+            {id: '8', x: 300, y: 200, size: 40, shape: 'circleNode',anchorPoints: [[0, 0.5], [0, 1]]},
+        ],
+        edges: [
+            {source: '7', target: '8', shape: 'line-arrow',sourceAnchor: 0,targetAnchor: 0,}
+        ]
+    };
+
+    const graph = new G6.Graph({
+      container: 'mountNode',
+      width: 500,
+      height: 300,
+      modes: {
+        // 支持的 behavior
+        default: [ 'drag-node'],
+      }
+    });
+
+    graph.data(data)
+    graph.render()
+  </script>
