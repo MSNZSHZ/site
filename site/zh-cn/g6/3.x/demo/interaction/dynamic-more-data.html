@@ -1,14 +1,14 @@
 <!--
-index: 2
-title: 动态加载数据
+index: 3
+title: 动态加载多条数据
 screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*HuCES7vutSsAAAAAAAAAAABkARQnAQ
 resource:
   jsFiles:
 -->
 <script>
   /**
-   * 该案例演示，当点击叶子节点时，如何向树图中动态添加数据。
-   * 主要演示addChild和refreshLayout的用法。
+   * 该案例演示，当点击叶子节点时，如何动态向树图中添加多条数据。
+   * 主要演示changeData的用法。
   */
   const graph = new G6.TreeGraph({
     container: 'mountNode',
@@ -45,11 +45,13 @@ resource:
       }
     }
   });
-
+  let i = 0;
   graph.edge(() => {
+    i++;
     return {
       shape: 'cubic-horizontal',
-      color: '#A3B1BF'
+      color: '#A3B1BF',
+      label: i
     }
   });
   const data = {
@@ -122,21 +124,41 @@ resource:
     const model = item.getModel()
     const children = model.children;
     if(!children || children.length === 0) {
-      const childData = { 
-        id: `child-data-${count}`, 
-        shape: 'rect', 
-        children: [
-          {
-            id: `x-${count}` 
-          },
-          {
-            id: `y-${count}` 
-          }
-        ] 
-      };
-      graph.addChild(childData, nodeId)
+      const childData = [
+        { 
+          id: `child-data-${count}`, 
+          shape: 'rect', 
+          children: [
+            {
+              id: `x-${count}` 
+            },
+            {
+              id: `y-${count}` 
+            }
+          ] 
+        },
+        { 
+          id: `child-data1-${count}`,
+          children: [
+            {
+              id: `x1-${count}` 
+            },
+            {
+              id: `y1-${count}` 
+            }
+          ] 
+        }
+      ];
+
+      const parentData = graph.findDataById(nodeId);
+      if (!parentData.children) {
+        parentData.children = [];
+      }
+      // 如果childData是一个数组，则直接赋值给parentData.children
+      // 如果是一个对象，则使用parentData.children.push(obj)
+      parentData.children = childData
+      graph.changeData()
       count++
-      graph.refreshLayout()
     }
   })
 </script>

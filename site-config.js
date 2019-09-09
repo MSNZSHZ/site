@@ -6,7 +6,7 @@ var pkg = require('./package.json');
 const g6Url = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-';
 const g6EditorUrl = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-editor-';
 const g6OldVersion = '2.2.6';
-const g6Version = '3.0.5-beta.7';
+const g6Version = '3.0.5-beta.12';
 const g6EditorVersion = '1.2.0';
 module.exports = {
     url: {
