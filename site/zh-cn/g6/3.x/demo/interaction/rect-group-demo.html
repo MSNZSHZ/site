@@ -1,0 +1,132 @@
+<!--
+index: 5
+title: Rect节点分组
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*oFd0QrPIhZQAAAAAAAAAAABkARQnAQ
+resource:
+  jsFiles:
+-->
+<script>
+  /** 
+     * 该案例演示Rect节点分组的以下功能：
+     *  1、渲染分组所需要的数据结构；
+     *  2、如何拖动一个分组；
+     *  3、将节点从分组中拖出；
+     *  4、将节点拖入到某个分组中；
+     *  5、拖出拖入节点后动态改变分组大小；
+     *  6、将分组从父分组中拖出；
+     *  7、双击收起分组；
+      * 8、双击展开分组。
+    */
+    G6.registerNode('rectNode', {
+    draw(cfg, group) {
+      const keyShape = group.addShape('rect', {
+        attrs: {
+          x: 0,
+          y: 0,
+          width: 80,
+          height: 50,
+          fill: '#87e8de'
+        }
+      });
+
+      const text = group.addShape('text', {
+        attrs: {
+          x: 35,
+          y: 25,
+          textAlign: 'center',
+          fill: 'blue',
+          text: cfg.label
+        }
+      })
+
+      return keyShape;
+    }
+  });
+  
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: 800,
+    height: 600,
+    defaultNode: {
+       shape: 'rectNode',
+       labelCfg: {
+         position: 'center'
+       }
+     },
+     defaultEdge: {
+       color: '#bae7ff',
+       style: {
+         endArrow: true
+       }
+     },
+    modes: {
+      default: [ 'drag-group', 'drag-node-with-group', 'collapse-expand-group' ]
+    },
+    groupType: 'rect'
+  });
+
+  const data = {
+      nodes: [
+        {
+          id: 'node6',
+          groupId: 'group3',
+          label: 'node6-group3',
+          x: 100,
+          y: 200,
+        },
+        {
+          id: 'node1',
+          label: 'node1-group1',
+          groupId: 'group1',
+          x: 100,
+          y: 0
+        },
+        {
+          id: 'node2',
+          label: 'node2-group2',
+          groupId: 'p2',
+          x: 150,
+          y: 100
+        },
+        {
+          id: 'node3',
+          label: 'node3-group2',
+          groupId: 'group2',
+          x: 300,
+          y: 0
+        },
+      ],
+      edges: [
+        {
+          source: 'node1',
+          target: 'node2'
+        },
+        {
+          source: 'node2',
+          target: 'node3'
+        },
+        {
+          source: 'node1',
+          target: 'node3'
+        },
+        {
+          source: 'node6',
+          target: 'node1'
+        }
+      ],
+      groups: [
+        {
+          id: 'group3',
+          title: '2',
+          parentId: 'p2'
+        },
+        {
+          id: 'p2',
+          title: '3'
+        }
+      ]
+    };
+
+  graph.data(data)
+  graph.render()
+</script>
