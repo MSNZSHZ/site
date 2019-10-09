@@ -1,0 +1,67 @@
+<!--
+index: 3
+title: Grid 网格
+resource:
+  jsFiles:
+   - ${url.jquery}
+   - ${url.g6Grid}
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*5K8BTqpapX8AAAAAAAAAAABkARQnAQ
+-->
+<script>
+  const data = {
+    nodes: [{
+      id: '0',
+      label: 'node-0',
+      x: 100,
+      y: 100
+    },
+    {
+      id: '1',
+      label: 'node-1',
+      x: 250,
+      y: 100
+    },
+    {
+      id: '2',
+      label: 'node-2',
+      x: 150,
+      y: 350
+    },
+    {
+      id: '3',
+      label: 'node-3',
+      x: 420,
+      y: 380
+    }],
+    edges: [{
+      id: 'e1',
+      source: '0',
+      target: '1'
+    },{
+      id: 'e2',
+      source: '0',
+      target: '3'
+    },{
+      id: 'e3',
+      source: '3',
+      target: '2'
+    }]
+  }
+  const grid = new Grid();
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    plugins: [ grid ],
+    defaultNode: {
+      size: [ 80, 40 ],
+      shape: 'rect'
+    },
+    modes: {
+      default: [ 'zoom-canvas', 'drag-canvas', 'drag-node' ]
+    }
+  });
+  graph.read(data);
+  graph.render();
+
+</script>

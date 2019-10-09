@@ -1,0 +1,306 @@
+<!--
+index: 6
+title: 点击扩展节点
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*cF9RTKSiCKIAAAAAAAAAAABkARQnAQ
+-->
+<script>
+  const getNodeById = {
+    data: {
+      nodes: [{
+        id: "20",
+        label: "name1",
+      },
+      {
+        id: "1",
+        label: "name2",
+      }],
+      edges: [{
+        source: "20",
+        target: "1"
+      }]
+    }
+  }
+  
+  // 根据节点扩展
+  const getNodesByNodeId = {
+    data: {
+      nodes: [{
+        id: "20",
+        label: "祁同伟",
+      },
+      {
+        id: "22",
+        label: "高晓秦",
+      },
+      {
+        id: "10",
+        label: "高育良"
+      },
+      {
+        id: "12",
+        label: "高晓凤"
+      },
+      {
+        id: "21",
+        label: "梁璐"
+      },
+      {
+        id: "11",
+        label: "吴淑芬"
+      },
+      {
+        id: "100",
+        label: "小米"
+      },
+      {
+        id: "102",
+        label: "茅台"
+      }],
+      edges: [{
+        target: "100",
+        source: "20"
+      },
+      {
+        target: "102",
+        source: "20"
+      },
+      {
+        target: "10",
+        source: "20"
+      },
+      {
+        target: "11",
+        source: "20"
+      },
+      {
+        target: "21",
+        source: "20"
+      },
+      {
+        target: "21",
+        source: "20"
+      },
+      {
+        target: "22",
+        source: "20"
+      },
+      {
+        target: "11",
+        source: "10",
+      },
+      {
+        target: "12",
+        source: "10"
+      },
+      {
+        target: "22",
+        source: "21",
+      },
+      {
+        target: "22",
+        source: "12"
+      }]
+    }
+  }
+  
+  // 根据节点扩展
+  const getNodesByNodeId2 = {
+    data: {
+      nodes: [{
+        id: "22",
+        label: "高晓秦"
+      },
+      {
+        id: "1000",
+        label: "晓秦1"
+      },
+      {
+        id: "1001",
+        label: "晓秦2"
+      },
+      {
+        id: "1002",
+        label: "晓秦3"
+      },
+      {
+        id: "1003",
+        label: "晓秦4"
+      },
+      {
+        id: "1004",
+        label: "晓秦5"
+      }],
+      edges: [{
+        target: "22",
+        source: "1000"
+      },
+      {
+        target: "22",
+        source: "1001"
+      },
+      {
+        target: "22",
+        source: "1002"
+      },
+      {
+        target: "1001",
+        source: "1002"
+      },
+      {
+        target: "1000",
+        source: "1"
+      },
+      {
+        target: "20",
+        source: "1002"
+      },
+      {
+        target: "22",
+        source: "1003"
+      },
+      {
+        target: "22",
+        source: "1004"
+      }]
+    }
+  }
+  
+  let clickedNodeId = -1;
+  let clickedNodePos = {
+    'x': 500,
+    'y': 300
+  };
+  
+  // 封装点击添加边的交互
+  G6.registerBehavior('click-add-node', {
+    getEvents() {
+      return {
+        'node:click': 'onClick'
+      };
+    },
+    onClick(ev) {
+      const itemModel = ev.item.getModel();
+      clickedNodeId = itemModel.id;
+      clickedNodePos.x = itemModel.x;
+      clickedNodePos.y = itemModel.y;
+      const graph = this.graph;
+      const nodes = graph.getNodes();
+      const edges = graph.getEdges();
+      let newData = getNodeById.data;
+      if (itemModel.id == 20) newData = getNodesByNodeId.data;
+      else if (itemModel.id == 22) newData = getNodesByNodeId2.data;
+      let newNodeModels = newData.nodes;
+      let newEdgeModels = newData.edges;
+      let allNodeModels = [],
+      allEdgeModels = [];
+  
+      // fix the existing nodes by set the fx and fy to the current value
+      // to cancel the fix the node, set fx = null fy = null
+      nodes.forEach((n, i) => {
+        const model = n.getModel();
+        model.fixed = true;
+        model.fx = model.x;
+        model.fy = model.y;
+        allNodeModels.push(model);
+      });
+  
+      newNodeModels.forEach((nodeModel, i) => {
+        // if it does not exist in nodes
+        let exist = false;
+        nodes.forEach((n, i) => {
+          if (n.getModel().id == nodeModel.id) {
+            exist = true;
+            return;
+          }
+        });
+        // then add it into graph
+        if (!exist) {
+          // set the initial positions of the new nodes at the clicked node
+          nodeModel.x = itemModel.x;
+          nodeModel.y = itemModel.y;
+          const node = graph.addItem('node', nodeModel);
+          allNodeModels.push(nodeModel);
+          nodes.push(node);
+        }
+      });
+  
+      newEdgeModels.forEach((em, i) => {
+        // if it does not exist in nodes
+        let exist = false;
+        edges.forEach((e, i) => {
+          const eModel = e.getModel();
+          if (eModel.source == em.source && eModel.target == em.target) {
+            exist = true;
+            return;
+          }
+        });
+        if (!exist) {
+          const edge = graph.addItem('edge', em);
+          edges.push(edge);
+        }
+      });
+      edges.forEach((e, i) => {
+        allEdgeModels.push(e.getModel());
+      });
+  
+      graph.changeData({
+        nodes: allNodeModels,
+        edges: allEdgeModels
+      });
+    }
+  });
+  
+  let data = getNodeById.data;
+  
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    layout: {
+      type: 'force',
+      center: [500, 300],
+      // 向心力作用点
+      nodeStrength: -30,
+      // 节点作用力
+      preventOverlap: true,
+      // 是否防止节点相互覆盖
+      nodeSize: 40,
+      // 节点大小 / 直径
+      edgeStrength: 0.1,
+      // 边的作用力, 默认为根据节点的入度出度自适应
+      linkDistance: 100,
+      // 默认边长度
+    },
+    modes: {
+      default: ['drag-node', 'click-select', 'click-add-node']
+    },
+    defaultNode: {
+      size: [40, 40],
+      color: 'steelblue'
+    },
+    defaultEdge: {
+      size: 1,
+      color: '#e2e2e2'
+    },
+    nodeStateStyles: {
+      selected: {
+        fill: 'steelblue'
+      }
+    }
+  });
+
+  const descriptionDiv = document.createElement("div"); 
+  descriptionDiv.innerHTML = '点击节点“name1”或“高小秦”试一试';
+  const graphDiv = document.getElementById("mountNode"); 
+  document.body.insertBefore(descriptionDiv, graphDiv); 
+  
+  graph.data(data);
+  graph.render();
+
+  graph.on('node:dragend', ev => {
+    const itemModel = ev.item.getModel();
+    itemModel.fixed = true;
+    itemModel.fx = ev.x;
+    itemModel.fy = ev.y;
+  });
+</script>

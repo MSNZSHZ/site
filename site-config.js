@@ -6,7 +6,7 @@ var pkg = require('./package.json');
 const g6Url = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-';
 const g6EditorUrl = 'https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-editor-';
 const g6OldVersion = '2.2.6';
-const g6Version = '3.0.5-beta.12';
+const g6Version = '3.1.0';
 const g6EditorVersion = '1.2.0';
 module.exports = {
     url: {
@@ -24,6 +24,8 @@ module.exports = {
         'f2-all': 'https://gw.alipayobjects.com/os/antv/assets/f2/3.3.8/f2-all.min.js',
         g6: g6Url + g6Version + '/build/g6.js',
         g6Minimap: g6Url + g6Version + '/build/minimap.js',
+        g6Grid: g6Url + g6Version + '/build/grid.js',
+        g6Bundling: g6Url + g6Version + '/build/bundling.js',
         'g6-plugins': g6Url + g6OldVersion + '/build/plugins.js',
         'g6-editor-flow': g6EditorUrl + g6EditorVersion+'/build/flow.js',
         'g6-editor-flow-css': g6EditorUrl + g6EditorVersion+'/build/flow.css',
