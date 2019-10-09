@@ -1,5 +1,5 @@
 <!--
-index: 3
+index: 5
 title: 响应节点区域事件
 resource:
   jsFiles:
@@ -14,9 +14,6 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
     margin: 10px 0;
   }
   .graph-tooltip {
-    position: absolute;
-    top: 0;
-    left: 0;
     border: 1px solid #e2e2e2;
     border-radius: 4px;
     font-size: 12px;
@@ -24,6 +21,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10px 8px;
     box-shadow: rgb(174, 174, 174) 0px 0px 10px;
+    position: absolute
   }
 </style>
 <script>
@@ -61,14 +59,18 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
   }
 
   // 注册自定义节点
-  G6.registerNode(
-    "customNode",
-    {
-      shapeType: "circle",
+  G6.registerNode("customNode", {
       // 绘制节点
       drawShape(cfg, group) {
         const shapeType = this.shapeType;
-        const style = this.getShapeStyle(cfg);
+        const style = G6.Util.mix({},
+          this.getShapeStyle(cfg), {
+            x: 0,
+            y: 0,
+            stroke: '#000',
+            r: 50
+          }
+        );
         const shape = group.addShape(shapeType, {
           attrs: style
         });
@@ -86,9 +88,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
         innerCircle.set("className", INNER_CIRCLE_CLASS);
         return shape;
       }
-    },
-    "circle"
-  );
+    }, "circle");
 
   function initGraph() {
     const data = {
@@ -123,8 +123,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
       width: 500,
       height: 500,
       modes: {
-        default: [
-          "drag-canvas",
+        default: [ "drag-canvas",
           {
             type: "drag-node",
             delegate: false
@@ -144,6 +143,11 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*tqnJRJE6lgwAA
   }
 
   const graph = initGraph();
+
+  const tipDiv = document.createElement("div"); 
+  tipDiv.innerHTML = '试一试点击节点内部绿色圆点部分或其他部分。';
+  const graphDiv = document.getElementById("mountNode"); 
+  document.body.insertBefore(tipDiv, graphDiv); 
 
   // 节点上的点击事件
   graph.on("node:click", event => {
