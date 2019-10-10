@@ -30,7 +30,7 @@
         <img src="{{ assets }}/image/empty-result.png" alt="">
     </div>
 {% endif %}
-    <div class="row flex-xl-nowrap" id="categories">
+    <div class="row flex-xl-nowrap" id="categories" {% if currentProduct != 'g2' %} style="padding-top:64px" {% endif %}>
         <div class="col-12 col-md-12 col-xl-12">
             <div class="content">
                 {% for cat in demos %}
