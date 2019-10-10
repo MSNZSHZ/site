@@ -24,7 +24,11 @@ plotDescription: 展示了小米科技有限责任公司的企业关系图谱
     container: 'mountNode',
     width: window.innerWidth,
     height: window.innerHeight,
-    autoPaint: false,
+    fitView: true,
+    layout: {
+      type: 'force',
+      edgeStrength: 0.7
+    },
     modes: {
       default: ['drag-canvas', {
         type: 'tooltip',
@@ -110,21 +114,21 @@ plotDescription: 展示了小米科技有限责任公司的企业关系图谱
         edge.id = 'edge' + i;
         return Object.assign({}, edge);
       }) });
-    const simulation = d3.forceSimulation()
-      .force("link", d3.forceLink().id(function(d) { return d.id; }).strength(0.5))
-      .force("charge", d3.forceManyBody())
-      .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2));
-    simulation
-      .nodes(data.nodes)
-      .on("tick", ticked);
-    simulation.force("link")
-      .links(data.edges);
+    // const simulation = d3.forceSimulation()
+    //   .force("link", d3.forceLink().id(function(d) { return d.id; }).strength(0.5))
+    //   .force("charge", d3.forceManyBody())
+    //   .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2));
+    // simulation
+    //   .nodes(data.nodes)
+    //   .on("tick", ticked);
+    // simulation.force("link")
+    //   .links(data.edges);
 
     graph.render();
 
-    function ticked() {
-      graph.refreshPositions();
-      graph.paint();
-    }
+    // function ticked() {
+    //   graph.refreshPositions();
+    //   graph.paint();
+    // }
   });
 </script>
