@@ -162,9 +162,9 @@ $('header').headroom({
   }
 });
 
+$('header').css({ position: 'fixed', width: '100%' });
 // 获取
 if ($search.length) {
-  $('header').css({ position: 'fixed', width: '100%' });
   let currentTag = '';
   $('#search-container>div').each(function() {
     $(this).find('.tag').each(function() {
