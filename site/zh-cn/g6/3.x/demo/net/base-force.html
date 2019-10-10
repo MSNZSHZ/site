@@ -12,7 +12,10 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552990403791-22d31a36
     container: 'mountNode',
     width: window.innerWidth,
     height: window.innerHeight,
-    autoPaint: false,
+    fitView: true,
+    layout: {
+      type: 'force'
+    },
     defaultNode: {
       size: [10, 10],
       color: 'steelblue',
@@ -26,47 +29,29 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552990403791-22d31a36
       color: '#e2e2e2'
     }
   });
-  const simulation = d3.forceSimulation()
-    .force("link", d3.forceLink().id(function(d) { return d.id; }).strength(0.3))
-    .force("charge", d3.forceManyBody())
-    .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2));
-  function refreshPosition(e) {
-    e.item.get('model').x = e.x;
-    e.item.get('model').y = e.y;
-    graph.refreshPositions();
-  }
-  graph.on('node:dragstart', e => {
-    simulation.alphaTarget(0.3).restart();
-    refreshPosition(e);
-  });
-  graph.on('node:drag', e => {
-    refreshPosition(e);
-  });
-  graph.on('node:dragend', e => {
-    simulation.alphaTarget(0);
-    refreshPosition(e);
-  });
   $.getJSON('https://gw.alipayobjects.com/os/antvdemo/assets/data/relations.json', data => {
     graph.data({ nodes: data.nodes, edges: data.edges.map((edge, i) => {
         edge.id = 'edge' + i;
         return Object.assign({}, edge);
       }) });
-    simulation.nodes(data.nodes)
-      .on("tick", ticked);
-    simulation.force("link")
-      .links(data.edges);
-
     graph.render();
 
-    function ticked() {
-      if (!graph.get('data')) {
-        graph.data(data);
-        graph.render();
-      } else {
-        graph.refreshPositions();
-      }
-      graph.paint();
-    }
+    graph.on('node:dragstart', e => {
+      graph.layout();
+      refreshDragedNodePosition(e);
+    });
+    graph.on('node:drag', e => {
+      refreshDragedNodePosition(e);
+    });
+    graph.on('node:dragend', e => {
+      e.item.get('model').fx = null;
+      e.item.get('model').fy = null;
+    });
   });
+  function refreshDragedNodePosition(e) {
+    const model = e.item.get('model');
+    model.fx = e.x;
+    model.fy = e.y;
+  }
 
 </script>
