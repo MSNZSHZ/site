@@ -1,10 +1,10 @@
 <!--
-index: 3
-title: 弧线图
+index: 4
+title: Cicular Arc Diagram 环形弧线图
 resource:
   jsFiles:
     - ${url.jquery}
-screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAAAAAAAAAAABkARQnAQ
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*BG6rQq5w6IcAAAAAAAAAAABkARQnAQ
 -->
 <style>
   .g6-tooltip {
@@ -19,11 +19,14 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAA
 </style>
 <script>
   const colors = ['rgb(64, 174, 247)', 'rgb(108, 207, 169)', 'rgb(157, 223, 125)', 'rgb(240, 198, 74)', 'rgb(221, 158, 97)', 'rgb(141, 163, 112)', 'rgb(115, 136, 220)', 'rgb(133, 88, 219)', 'rgb(203, 135, 226)', 'rgb(227, 137, 163)'];
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   const graph = new G6.Graph({
     container: 'mountNode',
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width,
+    height,
     linkCenter: true,
+    fitView: true,
     modes: {
       default: [{
         type: 'edge-tooltip',
@@ -39,7 +42,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAA
     defaultNode: {
       size: [10, 10],
       color: 'steelblue',
-      style:  {
+      style: {
         opacity:
         0.8,
         lineWidth: 1,
@@ -53,6 +56,12 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAA
         opacity: 0.6,
         lineAppendWidth: 3
       }
+    },
+    edgeStateStyles: {
+      hover: {
+        opacity: 1,
+        lineWidth: 2
+      }
     }
   });
   graph.on('edge:mouseenter', e => {
@@ -65,24 +74,20 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAA
   });
   
   $.getJSON('https://gw.alipayobjects.com/os/basement_prod/70cde3be-22e8-4291-98f1-4d5a5b75b62f.json', data => {
+    const origin = [width / 2, height / 2];
+    const radius = width < height ? width / 3 : height / 3;
     const edges = data.edges;
     const nodes = data.nodes;
     const nodeMap = new Map();
     const clusterMap = new Map();
     let clusterId = 0;
     const n = nodes.length;
-    const windowHeight = window.innerHeight;
-    const windowWidth = window.innerWidth;
-    const horiPadding = 50;
-    const begin = [horiPadding, windowHeight * 0.7];
-    const end = [windowWidth - horiPadding, windowHeight * 0.7];
-    const xLength = end[0] - begin[0];
-    const yLength = end[1] - begin[1];
-    const xSep = xLength / n;
-    const ySep = yLength / n;
+    const angleSep = Math.PI * 2 / n;
     nodes.forEach((node, i) => {
-      node.x = begin[0] + i * xSep;
-      node.y = begin[1] + i * ySep;
+      const angle = i * angleSep;
+      node.x = radius * Math.cos(angle) + origin[0];
+      node.y = radius * Math.sin(angle) + origin[1];
+      node.angle = angle;
       nodeMap.set(node.id, node);
       // cluster
       if (node.cluster && clusterMap.get(node.cluster) === undefined) {
@@ -102,19 +107,19 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*mfolTakYyTEAA
       node.labelCfg = {
         position: 'center',
         style: {
-          rotate: 90,
+          rotate: angle,
           textAlign: 'start'
         }
       }
     });
     edges.forEach((edge, i) => {
-      edge.shape = 'arc';
+      edge.shape = 'quadratic';
       const source = nodeMap.get(edge.source);
       const target = nodeMap.get(edge.target);
-      const endsSepStep = (target.x - source.x) / xSep;
-      const sign = endsSepStep < 0 ? -1 : 1;
-      const curveOffset = sign * 10 * Math.ceil(Math.abs(endsSepStep));
-      edge.curveOffset = curveOffset;
+      edge.controlPoints = [{
+        x: origin[0],
+        y: origin[1]
+      }];
       edge.color = source.style.fill;
       edge.sourceName = source.name;
       edge.targetName = target.name;

@@ -1,6 +1,6 @@
 <!--
-index: 4
-title: 自定义流程图
+index: 2
+title: 流程图自定义元素
 resource:
   jsFiles:
     - https://gw.alipayobjects.com/os/lib/dagre/0.8.4/dist/dagre.min.js
@@ -131,8 +131,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*nJ9rQbxKTO0AA
       getAnchorPoints: function getAnchorPoints() {
         return [[0, 0.5], [1, 0.5]];
       }
-    },
-    "single-shape"
+    }, "single-shape"
   );
 
   /**
@@ -152,111 +151,79 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*nJ9rQbxKTO0AA
         });
         return circle;
       }
-    },
-    "single-shape"
+    }, "single-shape"
   );
 
   /**
  * 自定义带箭头的贝塞尔曲线 edge
  */
-G6.registerEdge("line-with-arrow", {
-  itemType: "edge",
-  draw: function draw(cfg, group) {
-    const startPoint = cfg.startPoint;
-    const endPoint = cfg.endPoint;
-    const centerPoint = {
-      x: (startPoint.x + endPoint.x) / 2,
-      y: (startPoint.y + endPoint.y) / 2
-    };
-    // 控制点坐标
-    const controlPoint = {
-      x: (startPoint.x + centerPoint.x) / 2,
-      y: startPoint.y
-    };
+  G6.registerEdge("line-with-arrow", {
+    itemType: "edge",
+    draw: function draw(cfg, group) {
+      const startPoint = cfg.startPoint;
+      const endPoint = cfg.endPoint;
+      const centerPoint = {
+        x: (startPoint.x + endPoint.x) / 2,
+        y: (startPoint.y + endPoint.y) / 2
+      };
+      // 控制点坐标
+      const controlPoint = {
+        x: (startPoint.x + centerPoint.x) / 2,
+        y: startPoint.y
+      };
 
-    console.log(cfg, startPoint, endPoint);
-
-    // 为了更好的展示效果, 对称贝塞尔曲线需要连到箭头根部
-    const path = group.addShape("path", {
-      attrs: {
-        path: [
-          ["M", startPoint.x, startPoint.y],
-          [
-            "Q",
-            controlPoint.x + 8,
-            controlPoint.y,
-            centerPoint.x,
-            centerPoint.y
+      // 为了更好的展示效果, 对称贝塞尔曲线需要连到箭头根部
+      const path = group.addShape("path", {
+        attrs: {
+          path: [
+            ["M", startPoint.x, startPoint.y],
+            [
+              "Q",
+              controlPoint.x + 8,
+              controlPoint.y,
+              centerPoint.x,
+              centerPoint.y
+            ],
+            ["T", endPoint.x - 8, endPoint.y],
+            ["L", endPoint.x, endPoint.y]
           ],
-          ["T", endPoint.x - 8, endPoint.y],
-          ["L", endPoint.x, endPoint.y]
-        ],
-        stroke: "#ccc",
-        lineWidth: 1.6,
-        endArrow: {
-          path: "M 4,0 L -4,-4 L -4,4 Z",
-          d: 4
+          stroke: "#ccc",
+          lineWidth: 1.6,
+          endArrow: {
+            path: "M 4,0 L -4,-4 L -4,4 Z",
+            d: 4
+          }
         }
-      }
-    });
+      });
 
-    // 如果是不对称的贝塞尔曲线，需要计算贝塞尔曲线上的中心点
-    // 参考资料 https://stackoverflow.com/questions/54216448/how-to-find-a-middle-point-of-a-beizer-curve
-    // 具体Util方法可以参考G：https://github.com/antvis/g/blob/4.x/packages/g-math/src/quadratic.ts
+      // 如果是不对称的贝塞尔曲线，需要计算贝塞尔曲线上的中心点
+      // 参考资料 https://stackoverflow.com/questions/54216448/how-to-find-a-middle-point-of-a-beizer-curve
+      // 具体Util方法可以参考G：https://github.com/antvis/g/blob/4.x/packages/g-math/src/quadratic.ts
 
-    // 在贝塞尔曲线中心点上添加圆形
-    const { source, target } = cfg;
-    group.addShape("circle", {
-      attrs: {
-        id: `statusNode${source}-${target}`,
-        r: 6,
-        x: centerPoint.x,
-        y: centerPoint.y,
-        fill: cfg.active ? "#AB83E4" : "#ccc"
-      }
-    });
+      // 在贝塞尔曲线中心点上添加圆形
+      const { source, target } = cfg;
+      group.addShape("circle", {
+        attrs: {
+          id: `statusNode${source}-${target}`,
+          r: 6,
+          x: centerPoint.x,
+          y: centerPoint.y,
+          fill: cfg.active ? "#AB83E4" : "#ccc"
+        }
+      });
 
-    return path;
-  }
-});
-
-  const g = new dagre.graphlib.Graph();
-  g.setDefaultEdgeLabel(function() { return {}; });
-  g.setGraph({ rankdir: 'LR' });
-
-  data.nodes.forEach(node => {
-    g.setNode(node.id + '', { width: 150, height: 50 });
-  });
-
-  data.edges.forEach(edge => {
-    edge.source = edge.source + '';
-    edge.target = edge.target + '';
-    g.setEdge(edge.source, edge.target);
-  });
-  dagre.layout(g);
-
-  let coord;
-  g.nodes().forEach((node, i) => {
-    coord = g.node(node);
-    data.nodes[i].x = coord.x;
-    data.nodes[i].y = coord.y;
-  });
-  g.edges().forEach((edge, i) => {
-    coord = g.edge(edge);
-    const startPoint = coord.points[0];
-    const endPoint = coord.points[coord.points.length - 1];
-    data.edges[i].startPoint = startPoint;
-    data.edges[i].endPoint = endPoint;
-    data.edges[i].controlPoints = coord.points.slice(
-      1,
-      coord.points.length - 1
-    );
+      return path;
+    }
   });
 
   const graph = new G6.Graph({
     container: "mountNode",
     width: 1000,
     height: 800,
+    layout: {
+      type: 'dagre',
+      rankdir: 'LR'
+    },
     modes: {
       default: ['drag-canvas']
     },
@@ -270,10 +237,8 @@ G6.registerEdge("line-with-arrow", {
       }
     },
     defaultEdge: {
-      shape: "line-with-arrow"
-    },
-    edgeStyle: {
-      default: {
+      shape: "line-with-arrow",
+      style: {
         endArrow: true,
         lineWidth: 2,
         stroke: "#ccc"

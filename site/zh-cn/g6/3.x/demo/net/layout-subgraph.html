@@ -1,12 +1,11 @@
 <!--
-index: 4
-title: Radial 布局参数变化
-screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*sDoJQYIAa0EAAAAAAAAAAABkARQnAQ
+index: 9
+title: 子图布局
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*OgaJTZ24BF0AAAAAAAAAAABkARQnAQ
 -->
 <script>
   /**
-   * 该示例演示 Radial 布局的参数及其使用，以及布局参数的切换
-   * Radial 算法原文：http://jgaa.info/accepted/2011/BrandesPich2011.15.1.pdf
+   * 该示例演示子图布局
    * by 十吾
    */
   const data = {
@@ -388,94 +387,79 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*sDoJQYIAa0EAA
     }]
   };
   
+  const nodes = data.nodes;
+  
+  nodes.forEach((node, i) => {
+    if (i <= 16 && i !== 12) {
+      if (!node.style) {
+        node.style = {
+          fill: 'lightsteelblue'
+        }
+      } else {
+        node.style.fill = 'lightsteelblue';
+      }
+    }
+  });
+  
   const graph = new G6.Graph({
     container: 'mountNode',
     width: window.innerWidth,
     height: window.innerHeight,
+    fitView: true,
+    fitViewPadding: 40,
     modes: {
-      default: ['drag-canvas', 'drag-node'],
+      default: ['drag-node']
     },
-    layout: {
-      type: 'radial',
-      unitRadius: 50
-    },
-    animate: true,
     defaultNode: {
       size: [20, 20],
-      color: 'steelblue',
-      style: {
-        lineWidth: 2,
-        fill: '#fff'
-      }
+      color: 'steelblue'
     },
     defaultEdge: {
       size: 1,
-      color: '#e2e2e2',
-      style: {
-        endArrow: {
-          path: 'M 4,0 L -4,-4 L -4,4 Z',
-          d: 4
-        }
-      }
+      color: '#e2e2e2'
     }
   });
   graph.data(data);
   graph.render();
   
-  const descriptionDiv = document.createElement("div"); 
-  descriptionDiv.innerHTML = 'Radial 布局，中心点 = 0，单元半径 = 50，未防止重叠';
-  const graphDiv = document.getElementById("mountNode"); 
-  document.body.insertBefore(descriptionDiv, graphDiv); 
+  setTimeout(() => {
+    const nodes = data.nodes;
+    const edges = data.edges;
+    const newNodes = [];
+    const newEdges = [];
+    const newNodeMap = new Map();
+    // fix the nodes[0]
+    nodes[0].fx = nodes[0].x;
+    nodes[0].fy = nodes[0].y;
+    // add the nodes which should be re-layout
+    nodes.forEach((node, i) => {
+      if (i <= 16 && i !== 12) {
+        newNodes.push(node);
+        newNodeMap.set(node.id, i);
+      }
+    });
+    // add related edges
+    edges.forEach(edge => {
+      const sourceId = edge.source;
+      const targetId = edge.target;
+      if (newNodeMap.get(sourceId) !== undefined && newNodeMap.get(targetId) !== undefined) {
+        newEdges.push(edge);
+      }
+    });
   
-  layoutConfigTranslation();
-  
-  setInterval(() => {
-    layoutConfigTranslation();
-  },
-  7000);
-  
-  function layoutConfigTranslation() {
-    setTimeout(() => {
-      descriptionDiv.innerHTML = 'Radial 布局，中心点 = 0，单元半径 = 50，防止重叠';
-      graph.updateLayout({
-        preventOverlap: true,
-        nodeSize: 20
-      });
-    },
-    1000);
-  
-    setTimeout(() => {
-      descriptionDiv.innerHTML = 'Radial 布局，中心点 = 0，单元半径 = 80，防止重叠';
-      graph.updateLayout({
-        unitRadius: 80,
-      });
-    },
-    2500);
-  
-    setTimeout(() => {
-      descriptionDiv.innerHTML = 'Radial 布局，中心点 = 10，单元半径 = 80，防止重叠';
-      graph.updateLayout({
-        focusNode: '10',
-      });
-    },
-    4000);
-  
-    setTimeout(() => {
-      descriptionDiv.innerHTML = 'Radial 布局，中心点 = 20，单元半径 = 80，防止重叠';
-      graph.updateLayout({
-        focusNode: '20',
-      });
-    },
-    5500);
-  
-    setTimeout(() => {
-      descriptionDiv.innerHTML = 'Radial 布局，中心点 = 0，单元半径 = 50，未防止重叠';
-      graph.updateLayout({
-        focusNode: '0',
-        preventOverlap: false,
-        unitRadius: 50,
-      });
-    },
-    5500);
-  }
+    const subForceLayout = new G6.Layout['force']({
+      center: [nodes[0].x, nodes[0].y],
+      linkDistance: 70,
+      preventOverlap: true,
+      nodeSize: 20,
+      tick() { // the tick function to show the animation of layout process
+        graph.refreshPositions();
+      }
+    });
+    subForceLayout.init({
+      'nodes': newNodes,
+      'edges': newEdges
+    });
+    subForceLayout.execute();
+  }, 1000);
 </script>
