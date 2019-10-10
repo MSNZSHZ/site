@@ -4,6 +4,16 @@ title: Radial 交互扩展节点
 screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*3eVGT6OCQ4sAAAAAAAAAAABkARQnAQ
 -->
 <script>
+  /**
+   * 该示例演示在 Radial 布局中实现点击节点扩展相关点
+   * by 十吾
+   */
+
+  const descriptionDiv = document.createElement("div"); 
+  descriptionDiv.innerHTML = '试一试点击绿色节点';
+  const graphDiv = document.getElementById("mountNode"); 
+  document.body.insertBefore(descriptionDiv, graphDiv); 
+
   const data_m = {
     nodes: [{
       id: "5",

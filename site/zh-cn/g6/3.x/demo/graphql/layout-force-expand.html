@@ -4,6 +4,10 @@ title: 点击扩展节点
 screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*cF9RTKSiCKIAAAAAAAAAAABkARQnAQ
 -->
 <script>
+  /**
+   * 该示例演示在力导布局中实现点击节点扩展相关点，并且固定被点击的节点
+   * by 十吾
+   */
   const getNodeById = {
     data: {
       nodes: [{
@@ -258,7 +262,6 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*cF9RTKSiCKIAA
     height: window.innerHeight,
     layout: {
       type: 'force',
-      center: [500, 300],
       // 向心力作用点
       nodeStrength: -30,
       // 节点作用力
@@ -290,7 +293,7 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*cF9RTKSiCKIAA
   });
 
   const descriptionDiv = document.createElement("div"); 
-  descriptionDiv.innerHTML = '点击节点“name1”或“高小秦”试一试';
+  descriptionDiv.innerHTML = '点击节点“name1”或“高晓秦”试一试';
   const graphDiv = document.getElementById("mountNode"); 
   document.body.insertBefore(descriptionDiv, graphDiv); 
   

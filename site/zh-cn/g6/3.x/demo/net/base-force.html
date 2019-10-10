@@ -15,17 +15,15 @@ screenshot: https://cdn.nlark.com/yuque/0/2019/gif/174835/1552990403791-22d31a36
     autoPaint: false,
     defaultNode: {
       size: [10, 10],
-      color: 'steelblue'
+      color: 'steelblue',
+      style: {
+        lineWidth: 2,
+        fill: '#fff'
+      }
     },
     defaultEdge: {
       size: 1,
       color: '#e2e2e2'
-    },
-    nodeStyle: {
-      default: {
-        lineWidth: 2,
-        fill: '#fff'
-      }
     }
   });
   const simulation = d3.forceSimulation()
