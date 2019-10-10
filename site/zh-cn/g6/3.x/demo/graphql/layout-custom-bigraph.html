@@ -4,6 +4,10 @@ title: 自定义布局 - 二分图
 screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*JN0DQaNzcz0AAAAAAAAAAABkARQnAQ
 -->
 <script>
+  /**
+   * 该示例演示如何自定义布局
+   * by 十吾
+   */
   const data = {
     nodes: [{
       id: "0",
@@ -235,15 +239,6 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*JN0DQaNzcz0AA
     defaultEdge: {
       size: 1,
       color: '#e2e2e2'
-    },
-    nodeStyle: {
-      default: {
-        lineWidth: 2,
-        fill: '#fff'
-      },
-      selected: {
-        fill: 'steelblue'
-      }
     }
   });
   graph.data(data);

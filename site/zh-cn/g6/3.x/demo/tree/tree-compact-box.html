@@ -24,16 +24,17 @@ resource:
           }
         }, 'drag-canvas', 'zoom-canvas']
       },
-      defaultNode: { size: 16, anchorPoints: [[0,0.5], [1,0.5]]},
-      defaultEdge: { shape: 'cubic-horizontal' },
-      nodeStyle: {
-        default: {
+      defaultNode: {
+        size: 16,
+        anchorPoints: [[0,0.5], [1,0.5]],
+        style: {
           fill: '#40a9ff',
           stroke: '#096dd9'
         }
       },
-      edgeStyle: {
-        default: {
+      defaultEdge: {
+        shape: 'cubic-horizontal',
+        style: {
           stroke: '#A3B1BF'
         }
       },

@@ -39,16 +39,19 @@ plotDescription: 展示了小米科技有限责任公司的企业关系图谱
     },
     defaultNode: {
       size: [10, 10],
-      color: 'steelblue'
-    },
-    defaultEdge: {
-      size: 1
-    },
-    nodeStyle: {
-      default: {
+      style: {
         lineWidth: 2,
         fill: 'steelblue'
-      },
+      }
+    },
+    defaultEdge: {
+      size: 1,
+      style: {
+        stroke: '#e2e2e2',
+        lineAppendWidth: 2
+      }
+    },
+    nodeStateStyles: {
       highlight: {
         opacity: 1
       },
@@ -56,9 +59,10 @@ plotDescription: 展示了小米科技有限责任公司的企业关系图谱
         opacity: 0.2
       }
     },
-    edgeStyle: {
-      default: { stroke: '#e2e2e2', lineAppendWidth: 2 },
-      highlight: { stroke: '#999' }
+    edgeStateStyles: {
+      highlight: {
+        stroke: '#999'
+      }
     }
   });
   function clearAllStats() {

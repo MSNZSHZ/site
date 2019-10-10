@@ -1,9 +1,13 @@
 <!--
 index: 11
-title: 力导气泡
+title: Bubbles 力导气泡
 screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*6yMARoQa_EcAAAAAAAAAAABkARQnAQ
 -->
 <script>
+  /**
+   * 该示例演示如何使用力导布局算法实现 Bubbles 气泡效果
+   * by 十吾
+   */
   const colors = ['rgb(64, 174, 247)', 'rgb(108, 207, 169)', 'rgb(157, 223, 125)', 'rgb(240, 198, 74)'];
   
   const data = {
@@ -98,80 +102,11 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*6yMARoQa_EcAA
       preventOverlap: true,
     },
     modes: {
-    default:
-      ['drag-node']
+      default: ['drag-node']
     },
     defaultNode: {
-      size: [10, 10],
-      color: 'steelblue'
-    },
-    defaultEdge: {
-      size: 1,
-      color: '#e2e2e2'
-    },
-    nodeStyle: {
-    default:
-      {
-        opacity:
-        0.8,
-        lineWidth: 1,
-        stroke: '#999'
-      },
-      click: {
-        opacity: 1,
-      }
-    },
-    edgeStyle: {
-    default:
-      {
-        opacity:
-        0.6,
-        lineAppendWidth: 5
-      }
+      size: [10, 10]
     }
-  });
-  
-  const tipDiv = document.createElement("div");
-  tipDiv.innerHTML = '试一试点击或者拖动气泡';
-  const graphDiv = document.getElementById("mountNode"); 
-  document.body.insertBefore(tipDiv, graphDiv); 
-
-  function refreshDragedNodePosition(e) {
-    const model = e.item.get('model');
-    model.fx = e.x;
-    model.fy = e.y;
-  }
-  graph.on('node:dragstart', e => {
-    graph.layout();
-    refreshDragedNodePosition(e);
-  });
-  graph.on('node:drag', e => {
-    refreshDragedNodePosition(e);
-  });
-  graph.on('node:dragend', e => {
-    e.item.get('model').fx = null;
-    e.item.get('model').fy = null;
-  });
-  graph.on('node:click', e => {
-    const node = e.item;
-    const states = node.getStates();
-    let clicked = false;
-    const model = node.getModel();
-    let size = 200;
-    let labelText = 'NODE:' + model.id + '\n' + model.description;
-    states.forEach(state => {
-      if (state === 'click') {
-        clicked = true;
-        size = model.oriSize;
-        labelText = model.oriLabel;
-      }
-    });
-    graph.setItemState(node, 'click', !clicked);
-    graph.updateItem(node, {
-      size,
-      label: labelText
-    });
-    graph.layout();
   });
   
   // mapping
@@ -211,6 +146,49 @@ screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*6yMARoQa_EcAA
   nodes.forEach(node => {
     node.oriSize = node.size;
     node.oriLabel = node.label;
+  });
+
+  const tipDiv = document.createElement("div");
+  tipDiv.innerHTML = '试一试点击或者拖动气泡';
+  const graphDiv = document.getElementById("mountNode"); 
+  document.body.insertBefore(tipDiv, graphDiv); 
+
+  function refreshDragedNodePosition(e) {
+    const model = e.item.get('model');
+    model.fx = e.x;
+    model.fy = e.y;
+  }
+  graph.on('node:dragstart', e => {
+    graph.layout();
+    refreshDragedNodePosition(e);
+  });
+  graph.on('node:drag', e => {
+    refreshDragedNodePosition(e);
+  });
+  graph.on('node:dragend', e => {
+    e.item.get('model').fx = null;
+    e.item.get('model').fy = null;
+  });
+  graph.on('node:click', e => {
+    const node = e.item;
+    const states = node.getStates();
+    let clicked = false;
+    const model = node.getModel();
+    let size = 200;
+    let labelText = 'NODE: ' + model.id + '\n' + model.description;
+    states.forEach(state => {
+      if (state === 'click') {
+        clicked = true;
+        size = model.oriSize;
+        labelText = model.oriLabel;
+      }
+    });
+    graph.setItemState(node, 'click', !clicked);
+    graph.updateItem(node, {
+      size,
+      label: labelText
+    });
+    graph.layout();
   });
   
   graph.data(data);
