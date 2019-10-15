@@ -51,7 +51,7 @@ class Banner extends React.Component {
             </a>
             <br />
             <div className="yuque-link"> 
-              <a href='https://www.yuque.com/?chInfo=ch_antv'  style={{display: 'flex', position: 'relative', left: '-50%'}}>
+              <a href='https://www.yuque.com/?chInfo=ch_antv'  target='_blank' rel='noopener noreferrer' style={{display: 'flex', position: 'relative', left: '-50%'}}>
                 <img src='https://gw.alipayobjects.com/zos/basement_prod/14425752-e94c-4644-a60d-ad2c3d688b4a.svg' alt="" style={{marginTop: '-2px', width: '25px'}}/>
                 <p style={{color: 'rgba(255,255,255,.85)'}}>&nbsp;&nbsp;语雀，我们都喜欢的文档工具&nbsp;&nbsp;</p>
                 <img src='https://gw.alipayobjects.com/zos/basement_prod/fdabf7ad-5452-490b-958a-bb7a752e2a87.svg' alt="" style={{marginBottom: 1}}/>
