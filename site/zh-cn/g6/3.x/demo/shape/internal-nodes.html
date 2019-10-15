@@ -1,0 +1,78 @@
+<!--
+index: 0
+title: 内置节点
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*aErjSY30UtYAAAAAAAAAAABkARQnAQ
+resource:
+  jsFiles:
+-->
+<script>
+  const data = {
+    nodes: [{
+      x: 100,
+      y: 100,
+      shape: 'circle',
+      label: 'circle',
+   },{
+      x: 200,
+      y: 100,
+      shape: 'rect',
+     	label: 'rect',
+   },{
+      id: 'node-ellipse',
+      x: 330,
+      y: 100,
+     size: [60, 30],
+      shape: 'ellipse',
+     	label: 'ellipse',
+    labelCfg: {
+      position: 'bottom',
+      offset: 5
+    },
+    style: {
+      fill: '#fa8c16',
+      stroke: '#000',
+      lineWidth: 2
+    }
+   },{
+      id: 'node-diamond',
+      x: 460,
+      y: 100,
+      shape: 'diamond',
+     	label: 'diamond'
+   },{
+      id: 'node-triangle',
+      x: 100,
+      y: 200,
+      shape: 'triangle',
+     	label: 'triangle'
+   },{
+      id: 'node-star',
+      x: 200,
+      y: 200,
+      shape: 'star',
+     	label: 'star'
+   },{
+      x: 300,
+      y: 200,
+      size: 50,
+      shape: 'image',
+      img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
+     	label: 'image',
+   },{
+      id: 'node-modelRect',
+      x: 450,
+      y: 200,
+      description: '描述文本xxxxxxxxxxx',
+      shape: 'modelRect',
+     	label: 'modelRect'
+   }]
+  };
+  
+  const graph = new G6.Graph({
+  	container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  graph.data(data);
+  graph.render();
+</script>
