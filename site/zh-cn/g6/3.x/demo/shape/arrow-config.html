@@ -1,0 +1,84 @@
+<!--
+index: 13
+title: 箭头-内置
+resource:
+  jsFiles:
+screenshot: https://gw.alipayobjects.com/mdn/rms_f8c6a0/afts/img/A*4tXTQYim7XoAAAAAAAAAAABkARQnAQ
+-->
+<script>
+  /**
+   * 该案例演示如何使用内置箭头，以及自定义箭头的路径。
+   * by 十吾
+   * 
+  */
+  const data = {
+    nodes: [
+      {
+        id: 'node1',
+        label: 'node1',
+        x: 50,
+        y: 50
+      },
+      {
+        id: 'node2',
+        label: 'node2',
+        x: 150,
+        y: 150
+      },
+      {
+        id: 'node3',
+        label: 'node3',
+        x: 200,
+        y: 50
+      },
+      {
+        id: 'node4',
+        label: 'node4',
+        x: 300,
+        y: 150
+      }
+    ],
+    edges: [
+      // 带有箭头的边，内置箭头
+      {
+        source: 'node1',
+        target: 'node2',
+        label: '内置箭头',
+        style: {
+          endArrow: true
+        },
+        labelCfg: {
+          autoRotate: true,
+          refY: 10
+        }
+      },
+      // 带有箭头的边，自定义箭头的路径
+      {
+        source: 'node3',
+        target: 'node4',
+        label: '自定义箭头路径',
+        style: {
+          endArrow: {
+            path: 'M 4,0 L -4,-4 L -4,4 Z',
+            d: 4
+          }
+        },
+        labelCfg: {
+          autoRotate: true,
+          refY: 10
+        }
+      }
+    ]
+  }
+
+  const graph = new G6.Graph({
+    container: 'mountNode',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    defaultNode: {
+      size: [40, 40]
+    }
+  });
+  graph.data(data)
+  graph.render()
+</script>
