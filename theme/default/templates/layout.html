@@ -6,20 +6,6 @@
     <meta name="description" content="{{ description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block meta %}{% endblock %}
-
-    <!-- 跳转至新网址 -->
-    {% if currentProduct == 'g2' %}
-    <meta http-equiv="refresh" content="0; url=https://g2.antv.vision">
-    {% elif currentProduct == 'f2' %}
-    <meta http-equiv="refresh" content="0; url=https://f2.antv.vision">
-    {% elif currentProduct == 'l7' %}
-    <meta http-equiv="refresh" content="0; url=https://l7.antv.vision">
-    {% elif currentProduct == 'g6' %}
-    <meta http-equiv="refresh" content="0; url=https://g6.antv.vision">
-    {% else %}
-    <meta http-equiv="refresh" content="0; url=https://antv.vision">
-    {% endif %}
-
     <title>{{ title }} - AntV</title>
     <link rel="icon" href="https://gw.alipayobjects.com/os/antv/assets/favoricon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://gw.alipayobjects.com/os/antv/assets/lib/bootstrap-4.0.0-beta/bootstrap.min.css" />
@@ -86,6 +72,26 @@
 {% endif %}
 {% block js %}{% endblock %}
 <script type="text/javascript" src="{{ dist }}/common.js"></script>
+<script type="text/javascript">
+const host = window.location.host;
+const pathname = window.location.pathname;
+if (host === 'antv.alipay.com') { // 网站跳转
+  let url;
+  if (pathname.indexOf('g2') !== -1) {
+    url = 'https://g2.antv.vision';
+  } else if (pathname.indexOf('f2') !== -1) {
+    url = 'https://f2.antv.vision';
+  } else if (pathname.indexOf('g6') !== -1) {
+    url = 'https://g6.antv.vision';
+  } else if (pathname.indexOf('l7') !== -1) {
+    url = 'https://l7.antv.vision';
+  } else {
+    url = 'https://antv.vision';
+  }
+
+  window.location.href = url;
+}
+</script>
 {{ __userScripts | join | safe }}
 {% block userScript %}
 {% endblock %}
