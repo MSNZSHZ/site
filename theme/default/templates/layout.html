@@ -7,6 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block meta %}{% endblock %}
     <title>{{ title }} - AntV</title>
+    <script type="text/javascript">
+      const host = window.location.host;
+      const pathname = window.location.pathname;
+      if (host === 'antv.alipay.com') { // 网站跳转
+        let url;
+        if (pathname.indexOf('g2') !== -1) {
+          url = 'https://g2.antv.vision';
+        } else if (pathname.indexOf('f2') !== -1) {
+          url = 'https://f2.antv.vision';
+        } else if (pathname.indexOf('g6') !== -1) {
+          url = 'https://g6.antv.vision';
+        } else if (pathname.indexOf('l7') !== -1) {
+          url = 'https://l7.antv.vision';
+        } else {
+          url = 'https://antv.vision';
+        }
+
+        window.location.href = url;
+      }
+    </script>
     <link rel="icon" href="https://gw.alipayobjects.com/os/antv/assets/favoricon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://gw.alipayobjects.com/os/antv/assets/lib/bootstrap-4.0.0-beta/bootstrap.min.css" />
     <link rel="stylesheet" href="https://gw.alipayobjects.com/os/antv/assets/lib/bootstrap-4.0.0-beta/bootstrap-grid.min.css" />
@@ -72,26 +92,6 @@
 {% endif %}
 {% block js %}{% endblock %}
 <script type="text/javascript" src="{{ dist }}/common.js"></script>
-<script type="text/javascript">
-const host = window.location.host;
-const pathname = window.location.pathname;
-if (host === 'antv.alipay.com') { // 网站跳转
-  let url;
-  if (pathname.indexOf('g2') !== -1) {
-    url = 'https://g2.antv.vision';
-  } else if (pathname.indexOf('f2') !== -1) {
-    url = 'https://f2.antv.vision';
-  } else if (pathname.indexOf('g6') !== -1) {
-    url = 'https://g6.antv.vision';
-  } else if (pathname.indexOf('l7') !== -1) {
-    url = 'https://l7.antv.vision';
-  } else {
-    url = 'https://antv.vision';
-  }
-
-  window.location.href = url;
-}
-</script>
 {{ __userScripts | join | safe }}
 {% block userScript %}
 {% endblock %}
